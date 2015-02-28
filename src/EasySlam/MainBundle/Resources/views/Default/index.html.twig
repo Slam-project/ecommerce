@@ -1,1 +1,7 @@
-{{ knp_menu_render('main') }}
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-lg-1">{{ knp_menu_render('main') }}</div>
+    </div>
+{% endblock %}
