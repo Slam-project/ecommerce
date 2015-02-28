@@ -6,8 +6,17 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/easyslammain/index.css') }}" />
     </head>
     <body>
+        <div class="section header">
+            <div class="title">
+                <h2>Floris</h2>
+            </div>
+            <div class="container">
+                <div class="menu">{{ knp_menu_render('main') }}</div>
+            </div>
+        </div>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

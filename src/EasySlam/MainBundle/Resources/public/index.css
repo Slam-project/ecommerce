@@ -1,0 +1,92 @@
+@font-face {
+    font-family: "Ngarden";
+    src: url('/bundles/easyslammain/font/Ngarden.ttf');
+}
+@font-face {
+    font-family: "Orga";
+    src: url('/bundles/easyslammain/font/Organic.ttf');
+}
+@font-face {
+    font-family: "RosAnt";
+    src: url('/bundles/easyslammain/font/RosebudAnt.ttf');
+}
+@font-face {
+    font-family: "Ros";
+    src: url('/bundles/easyslammain/font/Rosebud.ttf');
+}
+@font-face {
+    font-family: "flow";
+    src: url('/bundles/easyslammain/font/flow.otf');
+}
+@font-face {
+    font-family: "Plant";
+    src: url('/bundles/easyslammain/font/PlantType.ttf');
+}
+@font-face {
+    font-family: "Plant2";
+    src: url('/bundles/easyslammain/font/CFPlant.ttf');
+}
+
+body {
+    background-color: grey;
+}
+
+h2 {
+    margin: 0;
+    padding-top: 20px;
+    text-align: center;
+    font-family: Plant2;
+    font-size: 80px;
+    color: green;
+}
+
+.header {
+    background-color: #22A0C4;
+}
+
+.menu {
+    display: block;
+}
+
+.menu ul {
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    display: table-cell;
+    width: 1%;
+    text-align: center;
+}
+
+.menu ul li.current a{
+    color: white;
+}
+
+.menu ul li:hover > a {
+    background-color: #0A662A;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    padding: 5px 0;
+    display: block;
+    color: black;
+    font-size: 14px;
+}
+
+.title {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 35px;
+    background-color: white;
+}
+
+.title img {
+    width: auto;
+    height: 60px;
+    float: left;
+    padding-left: 5%;
+}
