@@ -1,0 +1,8 @@
+easy_slam_main:
+    resource: "@EasySlamMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation
