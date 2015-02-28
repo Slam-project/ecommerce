@@ -4,6 +4,7 @@ namespace EasySlam\MainBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class MenuBuilder
 {
@@ -13,11 +14,18 @@ class MenuBuilder
     private $factory;
 
     /**
-     * @param \Knp\Menu\FactoryInterface $factory
+     * @var \Symfony\Component\Security\Core\SecurityContext
      */
-    public function __construct(FactoryInterface $factory)
+    private $securityContext;
+
+    /**
+     * @param \Knp\Menu\FactoryInterface $factory
+     * @param \Symfony\Component\Security\Core\SecurityContext $securityContext
+     */
+    public function __construct(FactoryInterface $factory, SecurityContext $securityContext)
     {
         $this->factory = $factory;
+        $this->securityContext = $securityContext;
     }
 
     public function createMainMenu()
@@ -26,9 +34,12 @@ class MenuBuilder
 
         $menu->addChild('Accueil', array('route' => 'homepage'));
         $menu->addChild('Nos produits', array('route' => 'homepage'));
-        $menu->addChild('Non panier', array('route' => 'homepage'));
-        $menu->addChild('Inscription', array('route' => 'homepage'));
-        $menu->addChild('Connexion', array('route' => 'homepage'));
+        $menu->addChild('Mon panier', array('route' => 'homepage'));
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+            $menu->addChild('Inscription', array('route' => 'fos_user_registration_register'));
+            $menu->addChild('Connexion', array('route' => 'fos_user_security_login'));
+        }
+
 
         return $menu;
     }

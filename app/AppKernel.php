@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new EasySlam\MainBundle\EasySlamMainBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new EasySlam\UserBundle\EasySlamUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

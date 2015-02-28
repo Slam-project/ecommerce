@@ -1,7 +1,7 @@
 services:
     app.menu_builder:
         class: EasySlam\MainBundle\Menu\MenuBuilder
-        arguments: ["@knp_menu.factory"]
+        arguments: ["@knp_menu.factory", "@security.context"]
 
     app.main_menu:
         class: Knp\Menu\MenuItem # the service definition requires setting the class
