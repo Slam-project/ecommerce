@@ -1,4 +1,12 @@
+easy_slam_user:
+    resource: "@EasySlamUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 easy_slam_main:
     resource: "@EasySlamMainBundle/Controller/"
     type:     annotation
     prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
