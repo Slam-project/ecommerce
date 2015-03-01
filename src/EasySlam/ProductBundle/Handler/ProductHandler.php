@@ -49,11 +49,34 @@ class ProductHandler
     /**
      * Return all the
      *
+     * @param array[string]
      * @return array[\EasySlam\ProductBundle\Entity\Product]
      */
     public function getAllProducts()
     {
         $products = $this->productRepository->findAll();
+
+        return $products;
+    }
+
+    public function getAllProductsSearch($criterias = array())
+    {
+        $where = 'VC.name = "' . $criterias[0] . '"';
+
+        for ($i = 1; $i < count($criterias); $i++) {
+            $where .= ' OR VC.name = "' . $criterias[$i] . '"';
+        }
+
+        $db = $this->em->getConnection();
+        $products = $db->prepare('SELECT P.* FROM VarianteColor VC
+                      INNER JOIN variantecolor_product V_P ON VC.id = V_P.variantecolor_id
+                      INNER JOIN Product P ON V_P.product_id = P.id
+                      WHERE ' . $where . '
+                      GROUP BY P.id
+                      HAVING count(P.id) = ' . count($criterias));
+        $products->execute();
+
+        $products = $products->fetchAll();
 
         return $products;
     }

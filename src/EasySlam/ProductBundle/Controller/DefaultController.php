@@ -6,17 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use EasySlam\ProductBundle\ProductHandler;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route(path="/nos-produits", name="product")
+     * @Route(path="/nos-produits/", name="product")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $test = $this->get('product_handler');
+        $varianteColor = $request->query->get('color');
 
-        return array();
+        if ($varianteColor) {
+            $products = $this->get('product_handler')->getAllProductsSearch($varianteColor);
+        } else {
+            $products = $this->get('product_handler')->getAllProducts();
+        }
+
+        return array("products" => $products);
     }
 }

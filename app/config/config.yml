@@ -86,10 +86,29 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 
+
 sonata_admin:
     title:  EasySlam ADMIN
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
+        list: SonataAdminBundle:CRUD:base_list.html.twig
+    dashboard:
+        groups:
+            easyslam.admin.group.content:
+                label: Ecommerce
+                label_catalogue: EasySlamProductBundle
+                items:
+                    - sonata.admin.product
+            easyslam.admin.group.variante:
+                label: Variantes
+                label_catalogue: EasySlamProductBundle
+                items:
+                    - sonata.admin.variantecolor
+
+imports:
+    - { resource: @EasySlamProductBundle/Resources/config/admin.yml }
+
+
 
 vich_uploader:
     db_driver: orm
