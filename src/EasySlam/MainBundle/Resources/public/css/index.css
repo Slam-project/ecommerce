@@ -77,6 +77,16 @@ iframe {
     padding-top: 4%;
 }
 
+.logo {
+    border: none;
+    background-image: url('/img/logo.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin-top: 280px;
+    padding-bottom: 170px;
+}
+
 .map {
     height: 400px;
     background-color: #292A2B;
@@ -90,11 +100,11 @@ iframe {
 }
 
 .map_info {
-    padding: 100px;
+    padding: 100px 0 0 100px;
     height: 400px;
     color: white;
-    font-size: 16px;
-    text-align: center;
+    font-size: 1em;//16px;
+    text-align: center;    
 }
 
 .menu {
@@ -138,14 +148,15 @@ iframe {
 .picture {
     background-image: url("/img/flofield.jpg");
     background-size: 100%;
-    background-position: 0 80%;
+    background-position: 100%;
     background-repeat: no-repeat;
+    background-color: #113325;
     width: 100%;
-    height: 400px;
+    height: auto;
 }
 
 .promo {
-    height: 200px;
+    height: auto;
     color: white;
 }
 
@@ -159,14 +170,6 @@ iframe {
     padding: 10px;
     background-color: #318A66;
     border-radius: 10px;
-}
-
-.promoMonth {
-    
-}
-
-.promoWeek {
-    
 }
 
 .reste {
@@ -193,11 +196,4 @@ iframe {
     width: 100%;
     padding-bottom: 35px;
     background-color: white;
-}
-
-.title img {
-    width: auto;
-    height: 60px;
-    float: left;
-    padding-left: 5%;
 }

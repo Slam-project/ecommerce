@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8"/>
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -14,14 +14,14 @@
                 <h2>Floris</h2>
             </div>
             <div class="container">
-                <div class="menu">{{ knp_menu_render('main') }}</div>
+                <div class="menu row">{{ knp_menu_render('main') }}</div>
             </div>
         </div>
         {% block body %}{% endblock %}
-        <div class="section footer raw">
+        <div class="section footer">
             <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="society col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-3">
-                    <div class="raw info">
+                    <div class="info">
                         <p>FLORIS</p>
                         <p>Adresse : Keizershoek 312 <br />2550 Kontich - België</p>
                         <p>Tel : +32 3 450 85 00</p>
@@ -29,12 +29,12 @@
                     </div>
                 </div>
                 <div class="reste col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                    <div class="raw">
+                    <div class="row">
                         <a href="#" class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">CONTACT</a>
                         <a href="#" class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">BOUTIQUE</a>
                         <a href="#" class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">DÉCORATION</a>
                     </div>
-                    <div class="raw">
+                    <div class="row">
                         <a href="#" class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">COLLECTION</a>
                         <a href="#" class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">NOUVEAUTÉ</a>
                         <a href="#" class="middle col-lg-4 col-md-4 col-sm-4 col-xs-4">GROUPE AGORA</a>
