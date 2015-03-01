@@ -3,6 +3,7 @@
 namespace EasySlam\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -70,6 +71,17 @@ class Product
      */
     protected $updateAt;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\ManyToMany(targetEntity="VarianteColor", mappedBy="products", cascade="persist")
+     */
+    private $variantesColor;
+
+
+    public function __construct()
+    {
+        $this->variantesColor = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -207,5 +219,47 @@ class Product
     public function getImageName()
     {
         return $this->imageName;
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\VarianteColor $varianteColor
+     */
+    public function addVariantesColor(VarianteColor $varianteColor)
+    {
+        if ($this->variantesColor->contains($varianteColor)) {
+            return;
+        }
+
+        $this->variantesColor[] = $varianteColor;
+
+        if (!$varianteColor->getProducts()->contains($this)) {
+            $varianteColor->addProduct($this);
+        }
+
+        return;
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\VarianteColor $varianteColor
+     */
+    public function removeVariantesColor(VarianteColor $varianteColor)
+    {
+        $this->variantesColor->removeElement($varianteColor);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVariantesColor()
+    {
+        return $this->variantesColor;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVarianteColor()
+    {
+        return $this->variantesColor;
     }
 }
