@@ -1,0 +1,11 @@
+services:
+    sonata.admin.product:
+        class: EasySlam\ProductBundle\Admin\ProductAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Product" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\Product
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
