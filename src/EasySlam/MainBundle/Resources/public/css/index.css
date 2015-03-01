@@ -27,8 +27,14 @@
     src: url('/bundles/easyslammain/font/CFPlant.ttf');
 }
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
-    
+    padding: 0;
+    margin: 0;
 }
 
 .caroumiddle {
@@ -50,7 +56,6 @@ body {
     background-color: white;
     height: 100px;
     max-height: 110px;
-    border-top: 30px solid #287655;
 }
 
 h2 {
@@ -83,8 +88,10 @@ iframe {
     background-size: 100%;
     background-repeat: no-repeat;
     height: 100%;
-    margin-top: 280px;
-    padding-bottom: 170px;
+    width: 180px;
+    margin: 420px 0;
+    float: right;
+    opacity: 0.8;
 }
 
 .map {
@@ -109,6 +116,8 @@ iframe {
 
 .menu {
     display: block;
+    padding: 0;
+    margin: 0;
 }
 
 .menu ul {
@@ -145,14 +154,19 @@ iframe {
     margin-top: 20px;
 }
 
+.Pict {
+    height: 600px;
+}
+
 .picture {
     background-image: url("/img/flofield.jpg");
-    background-size: 100%;
-    background-position: 100%;
+    background-size: auto auto;
+    background-position: 50%;
     background-repeat: no-repeat;
     background-color: #113325;
     width: 100%;
-    height: auto;
+    height: 100%;
+    padding: 0;
 }
 
 .promo {
