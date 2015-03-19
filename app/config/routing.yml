@@ -3,11 +3,6 @@ easy_slam_product:
     type:     annotation
     prefix:   /
 
-easy_slam_user:
-    resource: "@EasySlamUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 easy_slam_main:
     resource: "@EasySlamMainBundle/Controller/"
     type:     annotation
