@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
+     * Request type : ?color[]=Blanc
+     *
      * @Route(path="/nos-produits/", name="product")
      * @Template()
      */
