@@ -28,4 +28,16 @@ class DefaultController extends Controller
 
         return array("products" => $products);
     }
+
+    /**
+     * Ceci est le controleur du panier
+     *
+     * @Route(path="/panier", name="panier")
+     * @Template()
+     */
+    public function panierAction()
+    {
+        return array();
+    }
+
 }
