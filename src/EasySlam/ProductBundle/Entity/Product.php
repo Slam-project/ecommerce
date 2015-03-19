@@ -250,7 +250,15 @@ class Product
      */
     public function removeVariantesColor(VarianteColor $varianteColor)
     {
+        if (!$this->variantesColor->contains($varianteColor)) {
+            return;
+        }
+
         $this->variantesColor->removeElement($varianteColor);
+
+        if ($varianteColor->getProducts()->contains($this)) {
+            $varianteColor->removeProduct($this);
+        }
     }
 
     /**
@@ -290,9 +298,17 @@ class Product
     /**
      * @param \EasySlam\ProductBundle\Entity\VarianteType $varianteType
      */
-    public function removeVariantesType(VariantesType $varianteType)
+    public function removeVariantesType(VarianteType $varianteType)
     {
+        if (!$this->variantesType->contains($varianteType)) {
+            return;
+        }
+
         $this->variantesType->removeElement($varianteType);
+
+        if ($varianteType->getProducts()->contains($this)) {
+            $varianteType->removeProduct($this);
+        }
     }
 
     /**
@@ -309,5 +325,15 @@ class Product
     public function getVarianteType()
     {
         return $this->variantesType;
+    }
+
+    /**
+     * use by Sonata Admin Bundle
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
