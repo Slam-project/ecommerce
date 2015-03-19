@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -71,3 +71,54 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: EasySlam\UserBundle\Entity\User
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.user.block.menu:
+        sonata.user.block.account:
+        sonata.block.service.text:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+
+sonata_admin:
+    title:  EasySlam ADMIN
+    templates:
+        dashboard: SonataAdminBundle:Core:dashboard.html.twig
+        list: SonataAdminBundle:CRUD:base_list.html.twig
+    dashboard:
+        groups:
+            easyslam.admin.group.content:
+                label: Ecommerce
+                label_catalogue: EasySlamProductBundle
+                items:
+                    - sonata.admin.product
+            easyslam.admin.group.variante:
+                label: Variantes
+                label_catalogue: EasySlamProductBundle
+                items:
+                    - sonata.admin.variantecolor
+
+imports:
+    - { resource: @EasySlamProductBundle/Resources/config/admin.yml }
+
+
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        product_image:
+            uri_prefix:           /images/products
+            upload_destination:   %kernel.root_dir%/../web/images/products
+            namer:                vich_uploader.namer_uniqid
+
+            inject_on_load:   false
+            delete_on_update: true
+            delete_on_remove: true

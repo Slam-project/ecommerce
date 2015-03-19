@@ -1,0 +1,24 @@
+services:
+    sonata.admin.product:
+        class: EasySlam\ProductBundle\Admin\ProductAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Product" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\Product
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
+
+    sonata.admin.variantecolor:
+        class: EasySlam\ProductBundle\Admin\VarianteColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Variante", label: "Variante Color" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\VarianteColor
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
+
+
