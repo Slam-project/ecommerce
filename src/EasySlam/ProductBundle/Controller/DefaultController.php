@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * Request type : ?color[]=Blanc
+     * Request type : ?color[]=Blanc&type[]=Intérieur
      *
      * @Route(path="/nos-produits/", name="product")
      * @Template()
@@ -19,9 +19,14 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $varianteColor = $request->query->get('color');
+        $varianteType = $request->query->get('type');
 
-        if ($varianteColor) {
-            $products = $this->get('product_handler')->getAllProductsSearch($varianteColor);
+        if ($varianteColor && $varianteType) {
+            $products = $this->get('product_handler')->getProductsByColorType($varianteColor, $varianteType);
+        } elseif ($varianteType) {
+            $products = $this->get('product_handler')->getProductsByType($varianteType);
+        } elseif ($varianteColor) {
+            $products = $this->get('product_handler')->getProductsByColor($varianteColor);
         } else {
             $products = $this->get('product_handler')->getAllProducts();
         }
