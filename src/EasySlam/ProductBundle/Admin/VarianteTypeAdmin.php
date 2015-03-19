@@ -8,12 +8,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AdminInterface;
 
-class VarianteColorAdmin extends Admin
+class VarianteTypeAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'text', array('label' => 'Nom de la couleur'))
+            ->add('name', 'text', array('label' => 'Type'))
         ;
     }
 

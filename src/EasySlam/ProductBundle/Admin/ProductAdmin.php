@@ -21,6 +21,7 @@ class ProductAdmin extends Admin
                 'style' => 'padding-bottom:40px;',
             ), 'required' => false))
             ->add('variantesColor', null, ['label' => "Color", "required" => false, "multiple" => true, "by_reference" => false])
+            ->add('variantesType', null, ['label' => "Type", "required" => false, "multiple" => true, "by_reference" => false])
             ->end()
         ;
     }

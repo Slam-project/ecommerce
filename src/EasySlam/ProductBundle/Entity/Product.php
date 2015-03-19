@@ -77,6 +77,12 @@ class Product
      */
     private $variantesColor;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\ManyToMany(targetEntity="VarianteType", mappedBy="products", cascade="persist")
+     */
+    private $variantesType;
+
 
     public function __construct()
     {
@@ -261,5 +267,47 @@ class Product
     public function getVarianteColor()
     {
         return $this->variantesColor;
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\VarianteType $varianteType
+     */
+    public function addVariantesType(VarianteType $varianteType)
+    {
+        if ($this->variantesType->contains($varianteType)) {
+            return;
+        }
+
+        $this->variantesType[] = $varianteType;
+
+        if (!$varianteType->getProducts()->contains($this)) {
+            $varianteType->addProduct($this);
+        }
+
+        return;
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\VarianteType $varianteType
+     */
+    public function removeVariantesType(VariantesType $varianteType)
+    {
+        $this->variantesType->removeElement($varianteType);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVariantesType()
+    {
+        return $this->variantesType;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVarianteType()
+    {
+        return $this->variantesType;
     }
 }
