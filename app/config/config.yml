@@ -104,6 +104,7 @@ sonata_admin:
                 label_catalogue: EasySlamProductBundle
                 items:
                     - sonata.admin.variantecolor
+                    - sonata.admin.variantetype
 
 imports:
     - { resource: @EasySlamProductBundle/Resources/config/admin.yml }

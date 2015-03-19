@@ -21,4 +21,15 @@ services:
         calls:
             - [ setTranslationDomain, [EasySlamProductBundle]]
 
+    sonata.admin.variantetype:
+        class: EasySlam\ProductBundle\Admin\VarianteTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Variante", label: "Variante Type" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\VarianteType
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
+
 
