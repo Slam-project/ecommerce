@@ -2,4 +2,9 @@
 
 {% block body %}
 
+    {% for product in products %}
+        <br />Nom : {{ product.name }}
+        <br />Description : {{ product.description }}
+    {% endfor %}
+
 {% endblock %}
