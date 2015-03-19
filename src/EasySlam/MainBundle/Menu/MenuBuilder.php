@@ -33,11 +33,13 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
 
         $menu->addChild('Accueil', array('route' => 'homepage'));
-        $menu->addChild('Nos produits', array('route' => 'homepage'));
-        $menu->addChild('Mon panier', array('route' => 'homepage'));
-        if ($this->securityContext->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
+        $menu->addChild('Nos produits', array('route' => 'product'));
+        $menu->addChild('Mon panier', array('route' => 'panier'));
+        if (!$this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             $menu->addChild('Inscription', array('route' => 'fos_user_registration_register'));
             $menu->addChild('Connexion', array('route' => 'fos_user_security_login'));
+        } else {
+            $menu->addChild('Déconnexion', array('route' => 'fos_user_security_logout'));
         }
 
 
