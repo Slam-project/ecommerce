@@ -74,11 +74,6 @@ class VarianteType
         return $this->name;
     }
 
-    public function __tostring()
-    {
-        return $this->name;
-    }
-
     /**
      * @param \EasySlam\ProductBundle\Entity\Product $product
      */
@@ -111,5 +106,15 @@ class VarianteType
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * use by Sonata Admin Bundle
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
