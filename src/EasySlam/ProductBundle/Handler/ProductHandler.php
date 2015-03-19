@@ -59,7 +59,7 @@ class ProductHandler
         return $products;
     }
 
-    public function getAllProductsSearch($criterias = array())
+    public function getProductsByColor($criterias = array())
     {
         $where = 'VC.name = "' . $criterias[0] . '"';
 
@@ -73,7 +73,59 @@ class ProductHandler
                       INNER JOIN Product P ON V_P.product_id = P.id
                       WHERE ' . $where . '
                       GROUP BY P.id
-                      HAVING count(P.id) = ' . count($criterias));
+                      '); //HAVING count(P.id) = ' . count($criterias));
+        $products->execute();
+
+        $products = $products->fetchAll();
+
+        return $products;
+    }
+
+    public function getProductsByType($criterias = array())
+    {
+        $where = 'VT.name = "' . $criterias[0] . '"';
+
+        for ($i = 1; $i < count($criterias); $i++) {
+            $where .= ' OR VT.name = "' . $criterias[$i] . '"';
+        }
+
+        $db = $this->em->getConnection();
+        $products = $db->prepare('SELECT P.* FROM VarianteType VT
+                      INNER JOIN variantetype_product V_P ON VT.id = V_P.variantetype_id
+                      INNER JOIN Product P ON V_P.product_id = P.id
+                      WHERE ' . $where . '
+                      GROUP BY P.id
+                      '); //HAVING count(P.id) = ' . count($criterias));
+        $products->execute();
+
+        $products = $products->fetchAll();
+
+        return $products;
+    }
+
+    public function getProductsByColorType($criteriasColor = array(), $criteriasType = array())
+    {
+        $where = '( VC.name = "' . $criteriasColor[0] . '"';
+
+        for ($i = 1; $i < count($criteriasColor); $i++) {
+            $where .= ' OR VC.name = "' . $criteriasColor[$i] . '"';
+        }
+
+        $where .= ') AND ( VT.name = "' . $criteriasType[0] . '"';
+        for ($i = 1; $i < count($criteriasType); $i++) {
+            $where .= ' OR VT.name = "' . $criteriasType[$i] . '"';
+        }
+        $where .= ')';
+
+        $db = $this->em->getConnection();
+        $products = $db->prepare('SELECT P.* FROM VarianteType VT
+                      INNER JOIN variantetype_product VT_P ON VT.id = VT_P.variantetype_id
+                      INNER JOIN Product P ON VT_P.product_id = P.id
+                      INNER JOIN variantecolor_product VC_P ON VC_P.product_id = P.id
+                      INNER JOIN VarianteColor VC ON VC.id = VC_P.variantecolor_id
+                      WHERE ' . $where . '
+                      GROUP BY P.id
+                      '); //HAVING count(P.id) = ' . count($criteriasColor));
         $products->execute();
 
         $products = $products->fetchAll();
