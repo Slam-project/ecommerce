@@ -59,76 +59,90 @@ class ProductHandler
         return $products;
     }
 
+    /**
+     * Get all the product which have colours in criterias
+     *
+     * @param array $criterias
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function getProductsByColor($criterias = array())
     {
-        $where = 'VC.name = "' . $criterias[0] . '"';
+        $where = 'VC.id = ' . $criterias[0];
 
         for ($i = 1; $i < count($criterias); $i++) {
-            $where .= ' OR VC.name = "' . $criterias[$i] . '"';
+            $where .= ' OR VC.id = ' . $criterias[$i];
         }
 
-        $db = $this->em->getConnection();
-        $products = $db->prepare('SELECT P.* FROM VarianteColor VC
-                      INNER JOIN variantecolor_product V_P ON VC.id = V_P.variantecolor_id
-                      INNER JOIN Product P ON V_P.product_id = P.id
-                      WHERE ' . $where . '
-                      GROUP BY P.id
-                      '); //HAVING count(P.id) = ' . count($criterias));
-        $products->execute();
+        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteColor VC
+              INNER JOIN EasySlamProductBundle:Product p
+              WHERE VC MEMBER OF p.variantesColor
+              AND ' . $where . '
+              '
+        );
 
-        $products = $products->fetchAll();
+        $products = $products->getResult();
 
         return $products;
     }
 
+    /**
+     * Get all the product which have types in criterias
+     *
+     * @param array $criterias
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function getProductsByType($criterias = array())
     {
-        $where = 'VT.name = "' . $criterias[0] . '"';
+        $where = 'VT.id = ' . $criterias[0];
 
         for ($i = 1; $i < count($criterias); $i++) {
-            $where .= ' OR VT.name = "' . $criterias[$i] . '"';
+            $where .= ' OR VT.name = ' . $criterias[$i];
         }
 
-        $db = $this->em->getConnection();
-        $products = $db->prepare('SELECT P.* FROM VarianteType VT
-                      INNER JOIN variantetype_product V_P ON VT.id = V_P.variantetype_id
-                      INNER JOIN Product P ON V_P.product_id = P.id
-                      WHERE ' . $where . '
-                      GROUP BY P.id
-                      '); //HAVING count(P.id) = ' . count($criterias));
-        $products->execute();
+        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteType VT
+              INNER JOIN EasySlamProductBundle:Product p
+              WHERE VT MEMBER OF p.variantesType
+              AND ' . $where . '
+              '
+        );
 
-        $products = $products->fetchAll();
+        $products = $products->getResult();
 
         return $products;
     }
 
+    /**
+     * Get all the product which have colours and type in criterias
+     *
+     * @param array $criteriasColor
+     * @param array $criteriasType
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
     public function getProductsByColorType($criteriasColor = array(), $criteriasType = array())
     {
-        $where = '( VC.name = "' . $criteriasColor[0] . '"';
+        $where = '( VC.id = ' . $criteriasColor[0];
 
         for ($i = 1; $i < count($criteriasColor); $i++) {
-            $where .= ' OR VC.name = "' . $criteriasColor[$i] . '"';
+            $where .= ' OR VC.id = ' . $criteriasColor[$i];
         }
 
-        $where .= ') AND ( VT.name = "' . $criteriasType[0] . '"';
+        $where .= ') AND ( VT.id = ' . $criteriasType[0];
         for ($i = 1; $i < count($criteriasType); $i++) {
-            $where .= ' OR VT.name = "' . $criteriasType[$i] . '"';
+            $where .= ' OR VT.id = ' . $criteriasType[$i];
         }
         $where .= ')';
 
-        $db = $this->em->getConnection();
-        $products = $db->prepare('SELECT P.* FROM VarianteType VT
-                      INNER JOIN variantetype_product VT_P ON VT.id = VT_P.variantetype_id
-                      INNER JOIN Product P ON VT_P.product_id = P.id
-                      INNER JOIN variantecolor_product VC_P ON VC_P.product_id = P.id
-                      INNER JOIN VarianteColor VC ON VC.id = VC_P.variantecolor_id
-                      WHERE ' . $where . '
-                      GROUP BY P.id
-                      '); //HAVING count(P.id) = ' . count($criteriasColor));
-        $products->execute();
+        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteType VT
+              INNER JOIN EasySlamProductBundle:Product p WHERE VT MEMBER OF p.variantesType
+              INNER JOIN EasySlamProductBundle:VarianteColor VC WHERE VC MEMBER OF p.variantesColor
+              AND ' . $where . '
+              '
+        );
 
-        $products = $products->fetchAll();
+        $products = $products->getResult();
 
         return $products;
     }
