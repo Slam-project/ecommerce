@@ -87,6 +87,7 @@ class Product
     public function __construct()
     {
         $this->variantesColor = new ArrayCollection();
+        $this->variantesType = new ArrayCollection();
     }
 
     /**
@@ -216,7 +217,8 @@ class Product
      */
     public function setImageName($imageName)
     {
-        $this->imageName = $this->updateAt->format('Y-m-dTH:i:s#') . $imageName;
+        //$imageName = $this->updateAt->format('Y-m-dTH:i:s#') . $imageName;
+        $this->imageName = $imageName;
     }
 
     /**

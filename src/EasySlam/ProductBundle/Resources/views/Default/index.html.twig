@@ -1,10 +1,25 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+<div class="container" style="margin-top: 20px;">
+    {# Search menu #}
+    <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 searchPannel">
+        {{ form(formSearch) }}
+    </div>
 
-    {% for product in products %}
-        <br />Nom : {{ product.name }}
-        <br />Description : {{ product.description }}
-    {% endfor %}
-
+    {# Product view #}
+    <div class="col-xs-8 col-sm-8 col-md-10 col-lg-10">
+        {% for product in products %}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product">
+                <div class="infoProduct">
+                    <h4>{{ product.name }}</h4>
+                    <div class="align-left">
+                        <img style="width: 100%;" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
+                    </div>
+                    <br />Description : {{ product.description }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

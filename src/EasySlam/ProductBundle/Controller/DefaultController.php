@@ -2,11 +2,13 @@
 
 namespace EasySlam\ProductBundle\Controller;
 
+use EasySlam\ProductBundle\SearchForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use EasySlam\ProductBundle\ProductHandler;
 use Symfony\Component\HttpFoundation\Request;
+use EasySlam\ProductBundle\Form\Type\SearchType;
 
 class DefaultController extends Controller
 {
@@ -18,8 +20,23 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $varianteColor = $request->query->get('color');
-        $varianteType = $request->query->get('type');
+        $varianteColor = null;
+        $varianteType = null;
+
+        $productSearch = $request->query->all();
+        if (isset($productSearch['ProductSearch'])) {
+            $productSearch = $productSearch['ProductSearch'];
+        }
+
+        if (isset($productSearch)) {
+            if (isset($productSearch['Couleur'])) {
+                $varianteColor = $productSearch['Couleur'];
+            }
+
+            if (isset($productSearch['Type'])) {
+                $varianteType = $productSearch['Type'];
+            }
+        }
 
         if ($varianteColor && $varianteType) {
             $products = $this->get('product_handler')->getProductsByColorType($varianteColor, $varianteType);
@@ -31,7 +48,9 @@ class DefaultController extends Controller
             $products = $this->get('product_handler')->getAllProducts();
         }
 
-        return array("products" => $products);
+        $form = $this->createForm(new SearchType());
+
+        return array("products" => $products, 'formSearch' => $form->createView());
     }
 
     /**
