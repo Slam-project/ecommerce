@@ -54,6 +54,21 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route(path="/produit/{id}", requirements={"id" = "\d+"}, name="productInfo")
+     * @Template()
+     */
+    public function productAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $product = $em->getRepository('EasySlamProductBundle:Product');
+
+        $produit = $product->find($id);
+
+        return array('product' => $produit);
+    }
+
+    /**
      * Ceci est le controleur du panier
      *
      * @Route(path="/panier", name="panier")
