@@ -12,10 +12,13 @@
         {% for product in products %}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 product">
                 <div class="infoProduct">
-                    <h4>{{ product.name }}</h4>
-                    <div class="align-left">
-                        <img style="width: 100%;" src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
-                    </div>
+                    <a href="/produit/{{ product.id }}"><h4>{{ product.name }}</h4></a>
+                    <a href="{{ path("productInfo", { 'id': product.id }) }}">
+                        <div class="align-left">
+                            <img style="width: 100%;" src="{{ vich_uploader_asset(product, 'imageFile') }}"
+                                 alt="{{ product.name }}" />
+                        </div>
+                    </a>
                     <br />Description : {{ product.description }}
                 </div>
             </div>
