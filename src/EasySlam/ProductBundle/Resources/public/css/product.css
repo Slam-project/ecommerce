@@ -1,0 +1,94 @@
+a h4 {
+    color: #ffffff;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.barre {
+    margin-top: 20px;
+    height: 30px;
+    background-color: #287655;
+}
+
+p {
+    color: #ffffff;
+    position: absolute;
+    padding-left: 5px;
+    padding-top: 45px;
+    width: 84%;
+    display: none;
+    text-align: justify;
+}
+
+.board {
+    background-color: #113325;
+    padding-top: 28px;
+    border-radius: 10px;
+}
+
+.infoProduct {
+    padding: 5px;
+    background-color: #318A66;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid #292A2B;
+}
+
+.infoProduct:hover {
+    background-color: #292A2B;
+}
+
+.infoProduct h4 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.infoProduct:hover>a h4 {
+    color: #318A66;
+}
+
+.infoProduct:hover>p {
+    display: block;
+}
+
+.infoProduct:hover>a div img {
+    opacity: 0.15;
+}
+
+input[type=checkbox] {
+    float: left;
+    width: 15%;
+}
+
+label[for^=ProductSearch] {
+    width: 85%;
+    padding-left: 5px;
+}
+
+label.required {
+    color: #ffffff;
+    padding-top: 10px;
+}
+
+.product {
+    margin-bottom: 28px;
+}
+
+#ProductSearch_Rechercher {
+    color: #000000;
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.searchPannel {
+    float: left;
+    background-color: #113325;
+    border: 4px solid #292A2B;
+    padding: 14px;
+    color: #318A66;
+    border-radius: 10px;
+}
