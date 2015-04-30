@@ -101,12 +101,14 @@ sonata_admin:
                 label_catalogue: EasySlamProductBundle
                 items:
                     - sonata.admin.product
+                    - sonata.admin.commands
             easyslam.admin.group.variante:
                 label: Variantes
                 label_catalogue: EasySlamProductBundle
                 items:
                     - sonata.admin.variantecolor
                     - sonata.admin.variantetype
+                    - sonata.admin.etatcommand
 
 imports:
     - { resource: @EasySlamProductBundle/Resources/config/admin.yml }
