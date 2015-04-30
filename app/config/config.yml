@@ -109,6 +109,11 @@ sonata_admin:
                     - sonata.admin.variantecolor
                     - sonata.admin.variantetype
                     - sonata.admin.etatcommand
+            easyslam.admin.group.account:
+                label: Gestion des comptes
+                label_catalogue: EasySlamUserBundle
+                items:
+                    - sonata.admin.user
 
 imports:
     - { resource: @EasySlamProductBundle/Resources/config/admin.yml }
