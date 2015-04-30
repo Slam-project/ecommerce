@@ -10,6 +10,11 @@
     padding: 30px;
 }
 
+.content p {
+    color: #ffffff;
+    text-align: center;
+}
+
 .image {
     background-image: url("/img/wall.jpg");
     background-size: 100%;
