@@ -1,0 +1,11 @@
+services:
+    sonata.admin.user:
+        class: EasySlam\UserBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Utilisateurs" }
+        arguments:
+            - ~
+            - EasySlam\UserBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamUserBundle]]
