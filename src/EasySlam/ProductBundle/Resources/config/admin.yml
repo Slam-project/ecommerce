@@ -32,4 +32,35 @@ services:
         calls:
             - [ setTranslationDomain, [EasySlamProductBundle]]
 
+    sonata.admin.etatcommand:
+        class: EasySlam\ProductBundle\Admin\EtatCommandAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Variante", label: "État des commandes" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\EtatCommand
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
 
+    sonata.admin.commands:
+        class: EasySlam\ProductBundle\Admin\CommandAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Gestion des commandes" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\Commands
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
+
+    sonata.admin.detailscommands:
+        class: EasySlam\ProductBundle\Admin\DetailsCommandAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Gestion des commandes" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\DetailsCommand
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
