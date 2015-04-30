@@ -61,7 +61,7 @@ class CommandAdmin extends Admin
                     'label' => "État",
                     "required" => true,
                     "multiple" => false,
-                    "by_reference" => true,
+                    "by_reference" => false,
                 )
             )
         ;
@@ -76,7 +76,7 @@ class CommandAdmin extends Admin
                     'label' => "État",
                     "required" => true,
                     "multiple" => false,
-                    "by_reference" => true,
+                    "by_reference" => false,
                 )
             )
         ;

@@ -16,24 +16,28 @@ class DetailsCommandAdmin extends Admin
         $formMapper
             ->add('name', 'text', array(
                 'label' => 'Nom',
+                'required' => false,
                 'attr' => array(
-                    'readonly' => true
+                    'readonly' => true,
                 )
             ))
             ->add('description' , 'text', array(
                 'label' => 'De',
+                'required' => false,
                 'attr' => array(
                     'readonly' => true
                 )
             ))
             ->add('quantite' , 'text', array(
                 'label' => 'Quantité',
+                'required' => false,
                 'attr' => array(
                     'readonly' => true
                 )
             ))
             ->add('price' , 'text', array(
                 'label' => 'Prix',
+                'required' => false,
                 'attr' => array(
                     'readonly' => true
                 )
