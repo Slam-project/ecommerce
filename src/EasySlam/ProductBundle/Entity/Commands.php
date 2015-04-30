@@ -123,6 +123,11 @@ class Commands
         $this->detailsCommands = new ArrayCollection();
     }
 
+    public function setId($id)
+    {
+        return $this;
+    }
+
     /**
      * Get id
      *
@@ -431,5 +436,10 @@ class Commands
     public function getDetailsCommands()
     {
         return $this->detailsCommands;
+    }
+
+    public function __toString()
+    {
+        return "Gestion des commandes";
     }
 }
