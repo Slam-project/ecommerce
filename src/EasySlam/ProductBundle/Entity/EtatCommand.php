@@ -137,7 +137,7 @@ class EtatCommand
      */
     public function __toString()
     {
-        return $this->getEtat();
+        return $this->getName();
     }
 
     public function getName()
