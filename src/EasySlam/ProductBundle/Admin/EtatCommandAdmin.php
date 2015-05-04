@@ -15,6 +15,12 @@ class EtatCommandAdmin extends Admin
         $formMapper
             ->add('etat', 'text', array('label' => 'Nom de l\'état'))
             ->add('color' , 'text', array('label' => 'Couleur (en héxa)'))
+            ->add('base', 'checkbox',
+                array(
+                    'label' => 'État par défaut',
+                    'required' => false
+                )
+            )
         ;
     }
 
@@ -23,6 +29,9 @@ class EtatCommandAdmin extends Admin
         $datagridMapper
             ->add('etat')
             ->add('color')
+            ->add('base', null, array(
+                'label' => 'État par défaut'
+            ))
         ;
     }
 
@@ -31,6 +40,9 @@ class EtatCommandAdmin extends Admin
         $listMapper
             ->addIdentifier('etat')
             ->addIdentifier('color')
+            ->addIdentifier('base', null, array(
+                'label' => 'État par défaut'
+            ))
         ;
     }
 }

@@ -2,13 +2,14 @@
 
 namespace EasySlam\ProductBundle\Controller;
 
-use EasySlam\ProductBundle\SearchForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EasySlam\ProductBundle\Handler\ProductHandler;
+use EasySlam\ProductBundle\Handler\PanierHandler;
+use EasySlam\ProductBundle\Form\Type\BuyProductType;
+use EasySlam\ProductBundle\Form\Type\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use EasySlam\ProductBundle\ProductHandler;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use EasySlam\ProductBundle\Form\Type\SearchType;
 
 class DefaultController extends Controller
 {
@@ -57,15 +58,19 @@ class DefaultController extends Controller
      * @Route(path="/produit/{id}", requirements={"id" = "\d+"}, name="productInfo")
      * @Template()
      */
-    public function productAction($id)
+    public function productAction(Request $request, $id)
     {
+        $form = $this->createForm(new BuyProductType());
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $this->get('panier_handler')->addProduct($id, $request);
+        }
+
         $em = $this->getDoctrine()->getManager();
-
         $product = $em->getRepository('EasySlamProductBundle:Product');
-
         $produit = $product->find($id);
 
-        return array('product' => $produit);
+        return array('product' => $produit, 'panier' => $form->createView());
     }
 
     /**

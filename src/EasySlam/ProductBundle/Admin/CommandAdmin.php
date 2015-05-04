@@ -64,6 +64,12 @@ class CommandAdmin extends Admin
                     "by_reference" => false,
                 )
             )
+            ->add('final', null,
+                array(
+                    'label' => "Payé"
+                )
+            )
+
         ;
     }
 
@@ -77,6 +83,11 @@ class CommandAdmin extends Admin
                     "required" => true,
                     "multiple" => false,
                     "by_reference" => false,
+                )
+            )
+            ->add('final', null,
+                array(
+                    'label' => "Payé"
                 )
             )
         ;
