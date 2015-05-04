@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AdminInterface;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class CommandAdmin extends Admin
 {
@@ -91,5 +92,14 @@ class CommandAdmin extends Admin
                 )
             )
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->remove('create')
+            ->remove('delete')
+        ;
+
     }
 }

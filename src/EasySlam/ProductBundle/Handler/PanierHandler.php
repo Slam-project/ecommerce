@@ -65,14 +65,28 @@ class PanierHandler
             $command = $commandDB[0];
         }
 
-        $detailsCommand = new DetailsCommand();
-        $detailsCommand->setName($product->getName());
-        $detailsCommand->setDescription($product->getDescription());
-        $detailsCommand->setPrice($product->getPrice());
-        $detailsCommand->setQuantite($request->request->get('BuyProduct')['Quantite']);
-        $detailsCommand->setCommand($command);
 
-        $this->em->persist($detailsCommand);
+        $detailsCommandRepository = $this->em->getRepository('EasySlamProductBundle:DetailsCommand');
+        $detailsCommandDB = $detailsCommandRepository->findOneBy(array('product' => $product, 'command' => $command));
+
+        if (count($detailsCommandDB) == 0 ) {
+            $detailsCommand = new DetailsCommand();
+            $detailsCommand->setName($product->getName());
+            $detailsCommand->setDescription($product->getDescription());
+            $detailsCommand->setPrice($product->getPrice());
+            $detailsCommand->setQuantite($request->request->get('BuyProduct')['Quantite']);
+            $detailsCommand->setCommand($command);
+            $detailsCommand->setProduct($product);
+
+            $this->em->persist($detailsCommand);
+        } else {
+            $detailsCommandDB->setQuantite(
+                $detailsCommandDB->getQuantite() + $request->request->get('BuyProduct')['Quantite']
+            );
+
+            $this->em->persist($detailsCommandDB);
+        }
+
 
         $this->em->flush();
     }

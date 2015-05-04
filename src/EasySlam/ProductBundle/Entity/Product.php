@@ -83,9 +83,16 @@ class Product
      */
     private $variantesType;
 
+    /**
+     * @var \EasySlam\ProductBundle\Entity\DetailsCommand
+     * @ORM\OneToMany(targetEntity="DetailsCommand", mappedBy="product")
+     */
+    protected $detailsCommands;
+
 
     public function __construct()
     {
+        $this->detailsCommands = new ArrayCollection();
         $this->variantesColor = new ArrayCollection();
         $this->variantesType = new ArrayCollection();
     }
@@ -361,4 +368,37 @@ class Product
     {
         return $this->updateAt;
     }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\DetailsCommand $detailsCommand
+     */
+    public function addDetailsCommand(DetailsCommand $detailsCommand)
+    {
+        $detailsCommand->setProduct($this);
+
+        if (!$this->detailsCommands->contains($detailsCommand)) {
+            $this->detailsCommands->add($detailsCommand);
+        }
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\DetailsCommand $detailsCommand
+     */
+    public function removeDetailsCommand(DetailsCommand $detailsCommand)
+    {
+        if (!$this->variantesColor->contains($detailsCommand)) {
+            return;
+        }
+
+        $this->variantesColor->removeElement($detailsCommand);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getDetailsCommand()
+    {
+        return $this->detailsCommands;
+    }
+
 }
