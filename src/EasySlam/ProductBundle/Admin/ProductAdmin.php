@@ -15,7 +15,7 @@ class ProductAdmin extends Admin
         $formMapper
             ->add('name', 'text', array('label' => 'Nom'))
             ->add('description', 'text', array('label' => 'Description'))
-            ->add('price', 'text', array('label' => 'Prix'))
+            ->add('price', 'money', array('label' => 'Prix'))
             ->add('stock', 'text', array('label' => 'Stock'))
             ->add('imageFile', 'file', array('attr' => array(
                 'style' => 'padding-bottom:40px;',
