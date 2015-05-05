@@ -17,9 +17,10 @@ class DefaultController extends Controller
      * Request type : ?color[]=Blanc&type[]=Intérieur
      *
      * @Route(path="/nos-produits/", name="product")
+     * @Route(path="/nos-produits/{page}", defaults={"page"="1"}, requirements={"page" = "\d+"})
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $page = 1)
     {
         $varianteColor = null;
         $varianteType = null;
@@ -40,13 +41,13 @@ class DefaultController extends Controller
         }
 
         if ($varianteColor && $varianteType) {
-            $products = $this->get('product_handler')->getProductsByColorType($varianteColor, $varianteType);
+            $products = $this->get('product_handler')->getProductsByColorType($page, $varianteColor, $varianteType);
         } elseif ($varianteType) {
-            $products = $this->get('product_handler')->getProductsByType($varianteType);
+            $products = $this->get('product_handler')->getProductsByType($page, $varianteType);
         } elseif ($varianteColor) {
-            $products = $this->get('product_handler')->getProductsByColor($varianteColor);
+            $products = $this->get('product_handler')->getProductsByColor($page, $varianteColor);
         } else {
-            $products = $this->get('product_handler')->getAllProducts();
+            $products = $this->get('product_handler')->getAllProducts($page);
         }
 
         $form = $this->createForm(new SearchType());

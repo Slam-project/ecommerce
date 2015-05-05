@@ -52,9 +52,9 @@ class ProductHandler
      * @param array[string]
      * @return array[\EasySlam\ProductBundle\Entity\Product]
      */
-    public function getAllProducts()
+    public function getAllProducts($page)
     {
-        $products = $this->productRepository->findAll();
+        $products = $this->productRepository->findBy(array(), null, 20, ($page - 1) * 20);
 
         return $products;
     }
@@ -66,7 +66,7 @@ class ProductHandler
      * @return array|\Doctrine\DBAL\Driver\Statement
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getProductsByColor($criterias = array())
+    public function getProductsByColor($page, $criterias = array())
     {
         $where = 'VC.id = ' . $criterias[0];
 
@@ -79,7 +79,7 @@ class ProductHandler
               WHERE VC MEMBER OF p.variantesColor
               AND ' . $where . '
               '
-        );
+        )->setFirstResult(($page - 1) * 20)->setMaxResults(20);
 
         $products = $products->getResult();
 
@@ -93,7 +93,7 @@ class ProductHandler
      * @return array|\Doctrine\DBAL\Driver\Statement
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getProductsByType($criterias = array())
+    public function getProductsByType($page, $criterias = array())
     {
         $where = 'VT.id = ' . $criterias[0];
 
@@ -106,7 +106,7 @@ class ProductHandler
               WHERE VT MEMBER OF p.variantesType
               AND ' . $where . '
               '
-        );
+        )->setFirstResult(($page - 1) * 20)->setMaxResults(20);
 
         $products = $products->getResult();
 
@@ -121,7 +121,7 @@ class ProductHandler
      * @return array|\Doctrine\DBAL\Driver\Statement
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getProductsByColorType($criteriasColor = array(), $criteriasType = array())
+    public function getProductsByColorType($page, $criteriasColor = array(), $criteriasType = array())
     {
         $where = '( VC.id = ' . $criteriasColor[0];
 
@@ -140,7 +140,7 @@ class ProductHandler
               INNER JOIN EasySlamProductBundle:VarianteColor VC WHERE VC MEMBER OF p.variantesColor
               AND ' . $where . '
               '
-        );
+        )->setFirstResult(($page - 1) * 20)->setMaxResults(20);
 
         $products = $products->getResult();
 
