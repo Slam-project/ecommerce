@@ -41,13 +41,20 @@ class PanierHandler
     /**
      * @param $id
      * @param $request
+     * @return string
      */
     public function addProduct($id, Request $request)
     {
+        $qte = $request->request->get('BuyProduct')['Quantite'];
+
         $user = $this->securityContext->getToken()->getUser();
 
         $productRepository = $this->em->getRepository('EasySlamProductBundle:Product');
         $product = $productRepository->findOneBy(array('id' => $id));
+
+        if($qte > $product->getStock()) {
+            return "Stock insuffisant";
+        }
 
         $commandDB = $this->commandsRepository->findBy(array('final' => 0, 'user' => $user->getId()));
 
@@ -74,18 +81,19 @@ class PanierHandler
             $detailsCommand->setName($product->getName());
             $detailsCommand->setDescription($product->getDescription());
             $detailsCommand->setPrice($product->getPrice());
-            $detailsCommand->setQuantite($request->request->get('BuyProduct')['Quantite']);
+            $detailsCommand->setQuantite($qte);
             $detailsCommand->setCommand($command);
             $detailsCommand->setProduct($product);
 
             $this->em->persist($detailsCommand);
         } else {
-            $detailsCommandDB->setQuantite(
-                $detailsCommandDB->getQuantite() + $request->request->get('BuyProduct')['Quantite']
-            );
+            $detailsCommandDB->setQuantite($detailsCommandDB->getQuantite() + $qte);
 
             $this->em->persist($detailsCommandDB);
         }
+
+        $product->setStock($product->getStock() - $qte);
+        $this->em->persist($product);
 
 
         $this->em->flush();

@@ -23,7 +23,16 @@ class CommandAdmin extends Admin
                     )
                 )
             )
-
+            ->add('user', 'sonata_type_admin',
+                array(
+                    'label' => 'Compte',
+                    'attr' => array(
+                        'read_only' => true
+                    ),
+                    'required' => false,
+                    'delete' => false
+                )
+            )
             ->add('etat', null,
                 array(
                     'label' => "État",
