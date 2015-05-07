@@ -28,6 +28,33 @@ a:link {
     border-radius: 10px;
 }
 
+#BuyProduct {
+    float: right;
+}
+
+.contentDesc {
+    background-color: #318A66;
+    border: 1px solid #292A2B;
+    border-radius: 10px;
+    height: 300px;
+}
+
+.contentDesc img {
+    float: left;
+    margin: 10px;
+    height: 94%;
+    border: 1px solid #292A2B;
+}
+
+.contentDesc h5 {
+    color: #292A2B;
+}
+
+.contentDesc p {
+    color: #292A2B;
+    margin-top: 10px;
+}
+
 .infoProduct {
     padding: 5px;
     background-color: #318A66;
@@ -91,4 +118,12 @@ label.required {
     padding: 14px;
     color: #318A66;
     border-radius: 10px;
+}
+
+.titleDesc {
+    text-align: center;
+    border: 1px solid #318A66;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #292A2B;
 }
