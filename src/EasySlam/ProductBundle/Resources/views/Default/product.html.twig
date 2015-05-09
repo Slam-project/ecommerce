@@ -8,10 +8,16 @@
             </div>
             <div class="contentDesc">
                 <img src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
-                <p>{{ product.description }}</p>
-                <h5>{{ product.price }}</h5>
-                {{ form(panier) }}
+                <div class="DescFirst">
+                    <p>{{ product.description }}</p>
+                </div>
+                <div class="DescLast">
+                    <h5>Prix unitaire : {{ product.price }} €</h5>
+                    {{ form(panier) }}
+                </div>
+                <div style="clear: both;"></div>
             </div>
+
         </div>
     </div>
     <div class="barre2"></div>
