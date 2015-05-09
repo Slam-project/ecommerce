@@ -30,13 +30,30 @@ a:link {
 
 #BuyProduct {
     float: right;
+    padding-right: 20px;
+}
+
+#BuyProduct button {
+    padding: 10px;
+}
+
+#BuyProduct input {
+    margin-right: 20px;
+}
+
+#BuyProduct label {
+    padding-right: 10px;
+}
+
+#BuyProduct > div {
+    float: left;
 }
 
 .contentDesc {
     background-color: #318A66;
     border: 1px solid #292A2B;
     border-radius: 10px;
-    height: 300px;
+    width: 100%;
 }
 
 .contentDesc img {
@@ -52,7 +69,13 @@ a:link {
 
 .contentDesc p {
     color: #292A2B;
-    margin-top: 10px;
+    margin-top: 15px;
+    text-align: justify;
+    margin-right: 10px;
+}
+
+.DescLast h5 {
+    float: left;
 }
 
 .infoProduct {
