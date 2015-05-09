@@ -79,7 +79,7 @@ class ProductHandler
               WHERE VC MEMBER OF p.variantesColor
               AND ' . $where . '
               '
-        )->setFirstResult(($page - 1) * 20)->setMaxResults(20);
+        )->setFirstResult(($page - 1) * 12)->setMaxResults(12);
 
         $products = $products->getResult();
 
@@ -106,7 +106,7 @@ class ProductHandler
               WHERE VT MEMBER OF p.variantesType
               AND ' . $where . '
               '
-        )->setFirstResult(($page - 1) * 20)->setMaxResults(20);
+        )->setFirstResult(($page - 1) * 12)->setMaxResults(12);
 
         $products = $products->getResult();
 
@@ -140,7 +140,7 @@ class ProductHandler
               INNER JOIN EasySlamProductBundle:VarianteColor VC WHERE VC MEMBER OF p.variantesColor
               AND ' . $where . '
               '
-        )->setFirstResult(($page - 1) * 20)->setMaxResults(20);
+        )->setFirstResult(($page - 1) * 12)->setMaxResults(12);
 
         $products = $products->getResult();
 
