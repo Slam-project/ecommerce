@@ -12,8 +12,14 @@
                     <p>{{ product.description }}</p>
                 </div>
                 <div class="DescLast">
-                    <h5>Prix unitaire : {{ product.price }} €</h5>
-                    {{ form(panier) }}
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <h5>Prix unitaire : {{ product.price }} €</h5>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            {{ form(panier) }}
+                        </div>
+                    </div>
                 </div>
                 <div style="clear: both;"></div>
             </div>

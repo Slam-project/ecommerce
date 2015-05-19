@@ -16,7 +16,7 @@
                             <p class="blackfilter"> Description : {{ product.description }} </p>
                             <a href="/produit/{{ product.id }}"><h4>{{ product.name }}</h4></a>
                             <a href="{{ path("productInfo", { 'id': product.id }) }}">
-                                <div class="align-left">
+                                <div class="contImg align-left">
                                     <img style="width: 100%;" src="{{ vich_uploader_asset(product, 'imageFile') }}"
                                          alt="{{ product.name }}" />
                                 </div>
