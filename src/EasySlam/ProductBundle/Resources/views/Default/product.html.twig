@@ -7,18 +7,16 @@
                 <h4>{{ product.name }}</h4>
             </div>
             <div class="contentDesc">
-                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
-                <div class="DescFirst">
+                <div class="DescFirst row">
+                    <img src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
                     <p>{{ product.description }}</p>
                 </div>
-                <div class="DescLast">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <h5>Prix unitaire : {{ product.price }} €</h5>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            {{ form(panier) }}
-                        </div>
+                <div class="DescLast row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <h5>Prix unitaire : {{ product.price }} €</h5>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        {{ form(panier) }}
                     </div>
                 </div>
                 <div style="clear: both;"></div>
