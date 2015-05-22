@@ -82,7 +82,23 @@ class DefaultController extends Controller
      */
     public function panierAction()
     {
-        return array();
+        $user = $this->getUser();
+
+        $cmd = $this->getDoctrine()->getRepository("EasySlamProductBundle:Commands")
+            ->findBy(array('user' => $user), array('id' => 'DESC'), 1);
+
+        $detailsCommands = $this->getDoctrine()->getRepository("EasySlamProductBundle:DetailsCommand")
+            ->findBy(array('command' => $cmd));
+
+        return array('command' => $cmd[0], 'detailsCommands' => $detailsCommands);
     }
 
+    /**
+     * @Route(path="/panier/payment", name="payment")
+     * @Template()
+     */
+    public function paymentAction()
+    {
+        return array();
+    }
 }
