@@ -74,7 +74,7 @@ a:link {
 .contentDesc p {
     color: #292A2B;
     text-align: justify;
-    margin: 15px 10px 0px 10px;
+    margin: 12px 10px 0px 10px;
 }
 
 .contImg {
@@ -89,13 +89,22 @@ a:link {
     min-height: 190px;
 }
 
+.DescFirst img {
+    margin-left: 25px;
+    background-color: #ffffff;
+}
+
+.DescFirst p {
+    padding: 0px 15px 0px 15px;
+}
+
 .DescLast {
     min-height: 40px;
     margin: 15px 0px 15px 0px;
 }
 
 .DescLast h5 {
-    margin: 3px 0px 10px 70px;
+    margin: 3px 0px 10px 65px;
     padding: 5px;
     float: left;
     border: 1px solid #000000;
