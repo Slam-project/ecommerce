@@ -2,6 +2,12 @@
 
 {% block body %}
 
-    PANIER
+    Commande num&eacute;ro {{ command.id }} : <br />
+
+    {% for detailsCommand in detailsCommands %}
+        {{ detailsCommand.name }} <br />
+    {% endfor %}
+
+
 
 {% endblock %}
