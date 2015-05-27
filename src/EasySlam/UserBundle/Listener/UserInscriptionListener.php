@@ -25,8 +25,6 @@ class UserInscriptionListener
         foreach ($uow->getScheduledEntityInsertions() as $insertions) {
             foreach ($insertions as $entity) {
 
-                echo "ok";
-
                 if ($entity instanceof User) {
                     $entity->setEnabled(false);
 
@@ -42,7 +40,5 @@ class UserInscriptionListener
                 $uow->recomputeSingleEntityChangeSet($md, $insertions);
             }
         }
-
-        echo "ok";
     }
 }

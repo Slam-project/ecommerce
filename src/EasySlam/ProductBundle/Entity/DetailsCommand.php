@@ -57,6 +57,13 @@ class DetailsCommand
      */
     protected $command;
 
+    /**
+     * @var \EasySlam\ProductBundle\Entity\Product
+     *
+     * @ORM\ManyToOne(targetEntity="\EasySlam\ProductBundle\Entity\Product", inversedBy="detailsCommands")
+     */
+    protected $product;
+
 
     /**
      * Get id
@@ -176,6 +183,25 @@ class DetailsCommand
         return $this->command;
     }
 
+    /**
+     * @param \EasySlam\ProductBundle\Entity\Product $product
+     */
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @return \EasySlam\ProductBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();

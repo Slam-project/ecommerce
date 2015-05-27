@@ -37,7 +37,14 @@ class EtatCommand
     private $color;
 
     /**
-     * @ORM\OneToMany(targetEntity="\EasySlam\ProductBundle\Entity\Commands", mappedBy="etat", cascade={"persist"})
+     * @var boolean
+     *
+     * @ORM\Column(name="base", type="boolean")
+     */
+    private $base;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\EasySlam\ProductBundle\Entity\Commands", mappedBy="etat")
      */
     private $commands;
 
@@ -143,5 +150,24 @@ class EtatCommand
     public function getName()
     {
         return $this->etat;
+    }
+
+    /**
+     * @param boolean $base
+     * @return $this
+     */
+    public function setBase($base)
+    {
+        $this->base =$base;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getBase()
+    {
+        return $this->base;
     }
 }

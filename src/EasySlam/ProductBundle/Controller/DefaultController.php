@@ -2,13 +2,14 @@
 
 namespace EasySlam\ProductBundle\Controller;
 
-use EasySlam\ProductBundle\SearchForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EasySlam\ProductBundle\Handler\ProductHandler;
+use EasySlam\ProductBundle\Handler\PanierHandler;
+use EasySlam\ProductBundle\Form\Type\BuyProductType;
+use EasySlam\ProductBundle\Form\Type\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use EasySlam\ProductBundle\ProductHandler;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use EasySlam\ProductBundle\Form\Type\SearchType;
 
 class DefaultController extends Controller
 {
@@ -16,9 +17,10 @@ class DefaultController extends Controller
      * Request type : ?color[]=Blanc&type[]=Intérieur
      *
      * @Route(path="/nos-produits/", name="product")
+     * @Route(path="/nos-produits/{page}", defaults={"page"="1"}, requirements={"page" = "\d+"})
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $page = 1)
     {
         $varianteColor = null;
         $varianteType = null;
@@ -39,13 +41,13 @@ class DefaultController extends Controller
         }
 
         if ($varianteColor && $varianteType) {
-            $products = $this->get('product_handler')->getProductsByColorType($varianteColor, $varianteType);
+            $products = $this->get('product_handler')->getProductsByColorType($page, $varianteColor, $varianteType);
         } elseif ($varianteType) {
-            $products = $this->get('product_handler')->getProductsByType($varianteType);
+            $products = $this->get('product_handler')->getProductsByType($page, $varianteType);
         } elseif ($varianteColor) {
-            $products = $this->get('product_handler')->getProductsByColor($varianteColor);
+            $products = $this->get('product_handler')->getProductsByColor($page, $varianteColor);
         } else {
-            $products = $this->get('product_handler')->getAllProducts();
+            $products = $this->get('product_handler')->getAllProducts($page);
         }
 
         $form = $this->createForm(new SearchType());
@@ -57,15 +59,19 @@ class DefaultController extends Controller
      * @Route(path="/produit/{id}", requirements={"id" = "\d+"}, name="productInfo")
      * @Template()
      */
-    public function productAction($id)
+    public function productAction(Request $request, $id)
     {
+        $form = $this->createForm(new BuyProductType());
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $this->get('panier_handler')->addProduct($id, $request);
+        }
+
         $em = $this->getDoctrine()->getManager();
-
         $product = $em->getRepository('EasySlamProductBundle:Product');
-
         $produit = $product->find($id);
 
-        return array('product' => $produit);
+        return array('product' => $produit, 'panier' => $form->createView());
     }
 
     /**
@@ -76,7 +82,23 @@ class DefaultController extends Controller
      */
     public function panierAction()
     {
-        return array();
+        $user = $this->getUser();
+
+        $cmd = $this->getDoctrine()->getRepository("EasySlamProductBundle:Commands")
+            ->findBy(array('user' => $user), array('id' => 'DESC'), 1);
+
+        $detailsCommands = $this->getDoctrine()->getRepository("EasySlamProductBundle:DetailsCommand")
+            ->findBy(array('command' => $cmd));
+
+        return array('command' => $cmd[0], 'detailsCommands' => $detailsCommands);
     }
 
+    /**
+     * @Route(path="/panier/payment", name="payment")
+     * @Template()
+     */
+    public function paymentAction()
+    {
+        return array();
+    }
 }

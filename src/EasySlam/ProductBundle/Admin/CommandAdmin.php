@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AdminInterface;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class CommandAdmin extends Admin
 {
@@ -22,7 +23,16 @@ class CommandAdmin extends Admin
                     )
                 )
             )
-
+            ->add('user', 'sonata_type_admin',
+                array(
+                    'label' => 'Compte',
+                    'attr' => array(
+                        'read_only' => true
+                    ),
+                    'required' => false,
+                    'delete' => false
+                )
+            )
             ->add('etat', null,
                 array(
                     'label' => "État",
@@ -64,6 +74,12 @@ class CommandAdmin extends Admin
                     "by_reference" => false,
                 )
             )
+            ->add('final', null,
+                array(
+                    'label' => "Payé"
+                )
+            )
+
         ;
     }
 
@@ -79,6 +95,20 @@ class CommandAdmin extends Admin
                     "by_reference" => false,
                 )
             )
+            ->add('final', null,
+                array(
+                    'label' => "Payé"
+                )
+            )
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->remove('create')
+            ->remove('delete')
+        ;
+
     }
 }

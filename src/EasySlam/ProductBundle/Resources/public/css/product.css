@@ -15,11 +15,13 @@ a:link {
 .blackfilter {
     color: #ffffff;
     position: absolute;
-    padding-left: 5px;
-    padding-top: 45px;
-    width: 84%;
+    padding: 15px 5px 0px 5px;
+    border-radius: 5px;
+    margin-top: 30px;
+    width: 89%;
     display: none;
     text-align: justify;
+    background-color: #292A2B;
 }
 
 .board {
@@ -28,8 +30,89 @@ a:link {
     border-radius: 10px;
 }
 
-.infoProduct {
+#BuyProduct {
+    float: right;
+    padding-right: 20px;
+}
+
+#BuyProduct button {
+    padding: 10px;
+}
+
+#BuyProduct input {
+    margin-right: 20px;
+}
+
+#BuyProduct label {
+    padding-right: 10px;
+}
+
+#BuyProduct > div {
+    float: left;
+}
+
+.contentDesc {
+    background-color: #318A66;
+    border: 1px solid #292A2B;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 275px;
+}
+
+.contentDesc img {
+    float: left;
+    margin: 10px;
+    height: 94%;
+    border: 1px solid #292A2B;
+    background-color: #ffffff;
+}
+
+.contentDesc h5 {
+    color: #292A2B;
+}
+
+.contentDesc p {
+    color: #292A2B;
+    text-align: justify;
+    margin: 12px 10px 0px 10px;
+}
+
+.contImg {
     padding: 5px;
+}
+
+.contImg img {
+    background-color: #ffffff;
+}
+
+.DescFirst {
+    min-height: 190px;
+}
+
+.DescFirst img {
+    margin-left: 25px;
+    background-color: #ffffff;
+}
+
+.DescFirst p {
+    padding: 0px 15px 0px 15px;
+}
+
+.DescLast {
+    min-height: 40px;
+    margin: 15px 0px 15px 0px;
+}
+
+.DescLast h5 {
+    margin: 3px 0px 10px 65px;
+    padding: 5px;
+    float: left;
+    border: 1px solid #000000;
+    color: #ffffff;
+}
+
+.infoProduct {
+    /*padding: 5px;*/
     background-color: #318A66;
     height: 100%;
     border-radius: 5px;
@@ -42,7 +125,7 @@ a:link {
 
 .infoProduct h4 {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .infoProduct:hover>a h4 {
@@ -74,6 +157,7 @@ label.required {
 
 .product {
     margin-bottom: 28px;
+    overflow-y: auto;
 }
 
 #ProductSearch_Rechercher {
@@ -91,4 +175,12 @@ label.required {
     padding: 14px;
     color: #318A66;
     border-radius: 10px;
+}
+
+.titleDesc {
+    text-align: center;
+    border: 1px solid #318A66;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #292A2B;
 }
