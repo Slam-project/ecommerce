@@ -106,6 +106,7 @@ sonata_admin:
                 label: Variantes
                 label_catalogue: EasySlamProductBundle
                 items:
+                    - sonata.admin.variantecategory
                     - sonata.admin.variantecolor
                     - sonata.admin.variantetype
                     - sonata.admin.etatcommand

@@ -144,6 +144,9 @@ class EtatCommand
      */
     public function __toString()
     {
+        if ($this->getName() == null) {
+            return "Nouvel état";
+        }
         return $this->getName();
     }
 

@@ -60,6 +60,33 @@ class ProductHandler
     }
 
     /**
+     * Get all products which have category in criterias
+     *
+     * @param array $criterias
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getProductsByCategory($page, $criterias = array())
+    {
+        $where = 'VCat.id = ' . $criterias[0];
+
+        for ($i = 1; $i < count($criterias); $i++) {
+            $where .= ' OR VCat.id = ' . $criterias[$i];
+        }
+
+        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteCategory VCat
+              INNER JOIN EasySlamProductBundle:Product p
+              WHERE VCat MEMBER OF p.variantesCategory
+              AND ' . $where . '
+              '
+        )->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+
+        $products = $products->getResult();
+
+        return $products;
+    }
+
+    /**
      * Get all the product which have colours in criterias
      *
      * @param array $criterias

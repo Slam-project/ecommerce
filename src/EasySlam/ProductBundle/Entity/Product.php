@@ -73,6 +73,12 @@ class Product
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\ManyToMany(targetEntity="VarianteCategory", mappedBy="products", cascade="persist")
+     */
+    private $variantesCategory;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\ManyToMany(targetEntity="VarianteColor", mappedBy="products", cascade="persist")
      */
     private $variantesColor;
@@ -95,6 +101,7 @@ class Product
         $this->detailsCommands = new ArrayCollection();
         $this->variantesColor = new ArrayCollection();
         $this->variantesType = new ArrayCollection();
+        $this->variantesCategory = new ArrayCollection();
     }
 
     /**
@@ -237,6 +244,54 @@ class Product
     }
 
     /**
+     * @param \EasySlam\ProductBundle\Entity\VarianteCategory $varianteCategory
+     */
+    public function addVariantesCategory(VarianteCategory $varianteCategory)
+    {
+        if ($this->variantesCategory->contains($varianteCategory)) {
+            return;
+        }
+
+        $this->variantesCategory[] = $varianteCategory;
+
+        if (!$varianteCategory->getProducts()->contains($this)) {
+            $varianteCategory->addProduct($this);
+        }
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\VarianteCategory $varianteCategory
+     */
+    public function removeVariantesCategory(VarianteCategory $varianteCategory)
+    {
+        if (!$this->variantesCategory->contains($varianteCategory)) {
+            return;
+        }
+
+        $this->variantesCategory->removeElement($varianteCategory);
+
+        if ($varianteCategory->getProducts()->contains($this)) {
+            $varianteCategory->removeProduct($this);
+        }
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVariantesCategory()
+    {
+        return $this->variantesCategory;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getVarianteCategory()
+    {
+        return $this->variantesCategory;
+    }
+
+    /**
      * @param \EasySlam\ProductBundle\Entity\VarianteColor $varianteColor
      */
     public function addVariantesColor(VarianteColor $varianteColor)
@@ -343,6 +398,9 @@ class Product
      */
     public function __toString()
     {
+        if ($this->getName() == null) {
+            return "Nouveau produit";
+        }
         return $this->getName();
     }
 

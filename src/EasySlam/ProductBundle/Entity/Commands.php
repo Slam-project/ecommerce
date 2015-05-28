@@ -447,7 +447,7 @@ class Commands
 
     public function __toString()
     {
-        return "Gestion des commandes";
+        return $this->getName();
     }
 
     public function getFinal()
@@ -458,5 +458,10 @@ class Commands
     public function setFinal($final)
     {
         $this->final = $final;
+    }
+
+    public function getName()
+    {
+        return "Commande n° " . $this->getId();
     }
 }
