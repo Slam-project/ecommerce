@@ -58,15 +58,6 @@ body {
     max-height: 110px;
 }
 
-h2 {
-    margin: 0;
-    padding-top: 20px;
-    text-align: center;
-    font-family: Plant2;
-    font-size: 80px;
-    color: green;
-}
-
 .header {
     background-color: #287655;
 }
@@ -84,14 +75,11 @@ iframe {
 
 .logo {
     border: none;
-    background-image: url('/img/logo.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     height: 100%;
     width: 180px;
-    margin: 420px 0;
-    float: right;
-    opacity: 0.8;
+    margin-left: 45%;
 }
 
 .map {
@@ -155,7 +143,7 @@ iframe {
 }
 
 .Pict {
-    height: 600px;
+    height: 585px;
 }
 
 .picture {
