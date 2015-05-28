@@ -20,6 +20,7 @@ class ProductAdmin extends Admin
             ->add('imageFile', 'file', array('attr' => array(
                 'style' => 'padding-bottom:40px;',
             ), 'required' => false))
+            ->add('variantesCategory', null, ['label' => "Categorie", "required" => false, "multiple" => true, "by_reference" => false])
             ->add('variantesColor', null, ['label' => "Color", "required" => false, "multiple" => true, "by_reference" => false])
             ->add('variantesType', null, ['label' => "Type", "required" => false, "multiple" => true, "by_reference" => false])
             ->end()

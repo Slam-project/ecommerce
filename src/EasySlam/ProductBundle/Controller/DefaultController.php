@@ -24,6 +24,7 @@ class DefaultController extends Controller
     {
         $varianteColor = null;
         $varianteType = null;
+        $varianteCategory = null;
 
         $productSearch = $request->query->all();
         if (isset($productSearch['ProductSearch'])) {
@@ -38,6 +39,10 @@ class DefaultController extends Controller
             if (isset($productSearch['Type'])) {
                 $varianteType = $productSearch['Type'];
             }
+
+            if (isset($productSearch['Categorie'])) {
+                $varianteCategory = $productSearch['Categorie'];
+            }
         }
 
         if ($varianteColor && $varianteType) {
@@ -46,6 +51,8 @@ class DefaultController extends Controller
             $products = $this->get('product_handler')->getProductsByType($page, $varianteType);
         } elseif ($varianteColor) {
             $products = $this->get('product_handler')->getProductsByColor($page, $varianteColor);
+        } elseif ($varianteCategory) {
+            $products = $this->get('product_handler')->getProductsByCategory($page, $varianteCategory);
         } else {
             $products = $this->get('product_handler')->getAllProducts($page);
         }

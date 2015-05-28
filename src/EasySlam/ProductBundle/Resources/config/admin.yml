@@ -10,6 +10,17 @@ services:
         calls:
             - [ setTranslationDomain, [EasySlamProductBundle]]
 
+    sonata.admin.variantecategory:
+        class: EasySlam\ProductBundle\Admin\VarianteCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Variante", label: "Variante Category" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\VarianteCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]
+
     sonata.admin.variantecolor:
         class: EasySlam\ProductBundle\Admin\VarianteColorAdmin
         tags:
