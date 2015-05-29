@@ -2,12 +2,44 @@
 
 {% block body %}
 
-    Commande num&eacute;ro {{ command.id }} : <br />
+    <div class="scuttleback">
+        <div class="contentScuttle">
 
-    {% for detailsCommand in detailsCommands %}
-        {{ detailsCommand.name }} <br />
-    {% endfor %}
+            <h1>Mon panier</h1>
+            <div class="col-xs-12">
+                <hr>
+            </div>
+             <div>
+                <h2> Commande num&eacute;ro {{ command.id }} </h2>
+            </div>
+            <div class="col-xs-12">
+                <hr>
+            </div>
+            <div class="col-xs-12">
+                {% for detailsCommand in detailsCommands %}
+                    <div class="col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+                            <p> Libellé : {{ detailsCommand.name }} </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+                            <p> Prix unitaire : {{ detailsCommand.price }} €</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+                            <p> Quantité : {{ detailsCommand.quantite }} </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-xs-12">
+                <hr>
+            </div>
+            <div class="total col-xs-12">
+                <p> Total HT : <font color="red">100</font></h3> € </p>
+            </div>
 
-
+            <br />
+        </div>
+    </div>
+    <div class="barre3"></div>
 
 {% endblock %}
