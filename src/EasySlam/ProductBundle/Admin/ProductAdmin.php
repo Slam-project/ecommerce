@@ -23,6 +23,22 @@ class ProductAdmin extends Admin
             ->add('variantesCategory', null, ['label' => "Categorie", "required" => false, "multiple" => true, "by_reference" => false])
             ->add('variantesColor', null, ['label' => "Color", "required" => false, "multiple" => true, "by_reference" => false])
             ->add('variantesType', null, ['label' => "Type", "required" => false, "multiple" => true, "by_reference" => false])
+            ->add('isPlanteSemaine', 'checkbox', array(
+                'label' => 'Plante de la semaine',
+                'required' => false
+            ))
+            ->add('isPlanteMois', 'checkbox', array(
+                'label' => 'Plante du mois',
+                'required' => false
+            ))
+            ->add('isAccessoireSemaine', 'checkbox', array(
+                'label' => 'Accessoire de la semaine',
+                'required' => false
+            ))
+            ->add('isAccessoireMois', 'checkbox', array(
+                'label' => 'Accessoire du mois',
+                'required' => false
+            ))
             ->end()
         ;
     }
@@ -34,6 +50,10 @@ class ProductAdmin extends Admin
             ->add('description')
             ->add('price')
             ->add('stock')
+            ->add('isPlanteSemaine')
+            ->add('isPlanteMois')
+            ->add('isAccessoireSemaine')
+            ->add('isAccessoireMois')
         ;
     }
 
@@ -44,6 +64,10 @@ class ProductAdmin extends Admin
             ->add('description')
             ->add('price')
             ->add('stock')
+            ->add('isPlanteSemaine')
+            ->add('isPlanteMois')
+            ->add('isAccessoireSemaine')
+            ->add('isAccessoireMois')
         ;
     }
 }
