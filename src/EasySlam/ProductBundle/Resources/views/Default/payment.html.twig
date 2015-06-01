@@ -2,6 +2,33 @@
 
 {% block body %}
 
-    Page de paiement
+    <div class="container scuttleback">
+        <div class="contentScuttle">
+
+            <h1>Payment</h1>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <hr class="ligne">
+            </div>
+            {% if command is defined %}
+                <h2 class="titleCommand"> Commande num&eacute;ro {{ command.id }} </h2>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <hr class="ligne">
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {{ form(form) }}
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <hr>
+                </div>
+                <div class="total col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p> Total HT : <font color="red">{{ prixHt }}</font></h3> €</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="barre3"></div>
 
 {% endblock %}

@@ -22,7 +22,7 @@ class UserAdmin extends Admin
                 )
             ))
             ->add('enabled', 'checkbox', array(
-                'label' => 'Activé',
+                'label' => 'Compte activé',
                 'required' => false
             ))
         ;
