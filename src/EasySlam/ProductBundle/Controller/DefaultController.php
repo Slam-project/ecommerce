@@ -17,45 +17,44 @@ class DefaultController extends Controller
     /**
      * Request type : ?color[]=Blanc&type[]=Intérieur
      *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int page
+     *
      * @Route(path="/nos-produits/", name="product")
      * @Route(path="/nos-produits/{page}", defaults={"page"="1"}, requirements={"page" = "\d+"})
      * @Template()
+     *
+     * @return array
      */
     public function indexAction(Request $request, $page = 1)
     {
-        $varianteColor = null;
-        $varianteType = null;
-        $varianteCategory = null;
-
         $productSearch = $request->query->all();
         if (isset($productSearch['ProductSearch'])) {
             $productSearch = $productSearch['ProductSearch'];
         }
 
         if (isset($productSearch)) {
-            if (isset($productSearch['Couleur'])) {
-                $varianteColor = $productSearch['Couleur'];
+            if (isset($productSearch['Couleur']) && isset($productSearch['Type']) && isset($productSearch['Categorie'])){
+                $products = $this->get('product_handler')
+                    ->getProductsByColorTypeCategory($page, $productSearch['Couleur'], $productSearch['Type'], $productSearch['Categorie']);
+            } elseif (isset($productSearch['Couleur']) && isset($productSearch['Type'])) {
+                $products = $this->get('product_handler')
+                    ->getProductsByColorType($page, $productSearch['Couleur'], $productSearch['Type']);
+            } elseif (isset($productSearch['Couleur']) && isset($productSearch['Categorie'])) {
+                $products = $this->get('product_handler')
+                    ->getProductsByColorCategory($page, $productSearch['Couleur'], $productSearch['Categorie']);
+            } elseif (isset($productSearch['Type']) && isset($productSearch['Categorie'])) {
+                $products = $this->get('product_handler')
+                    ->getProductsByTypeCategory($page, $productSearch['Type'], $productSearch['Categorie']);
+            } elseif (isset($productSearch['Type'])) {
+                $products = $this->get('product_handler')->getProductsByType($page, $productSearch['Type']);
+            } elseif (isset($productSearch['Couleur'])) {
+                $products = $this->get('product_handler')->getProductsByColor($page, $productSearch['Couleur']);
+            } elseif (isset($productSearch['Categorie'])) {
+                $products = $this->get('product_handler')->getProductsByCategory($page, $productSearch['Categorie']);
+            } else {
+                $products = $this->get('product_handler')->getAllProducts($page);
             }
-
-            if (isset($productSearch['Type'])) {
-                $varianteType = $productSearch['Type'];
-            }
-
-            if (isset($productSearch['Categorie'])) {
-                $varianteCategory = $productSearch['Categorie'];
-            }
-        }
-
-        if ($varianteColor && $varianteType) {
-            $products = $this->get('product_handler')->getProductsByColorType($page, $varianteColor, $varianteType);
-        } elseif ($varianteType) {
-            $products = $this->get('product_handler')->getProductsByType($page, $varianteType);
-        } elseif ($varianteColor) {
-            $products = $this->get('product_handler')->getProductsByColor($page, $varianteColor);
-        } elseif ($varianteCategory) {
-            $products = $this->get('product_handler')->getProductsByCategory($page, $varianteCategory);
-        } else {
-            $products = $this->get('product_handler')->getAllProducts($page);
         }
 
         $form = $this->createForm(new SearchType());
@@ -64,8 +63,13 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param int $id
+     *
      * @Route(path="/produit/{id}", requirements={"id" = "\d+"}, name="productInfo")
      * @Template()
+     *
+     * @return array
      */
     public function productAction(Request $request, $id)
     {
