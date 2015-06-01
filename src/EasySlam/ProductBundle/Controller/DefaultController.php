@@ -2,6 +2,7 @@
 
 namespace EasySlam\ProductBundle\Controller;
 
+use EasySlam\ProductBundle\Form\Type\PaymentType;
 use EasySlam\ProductBundle\Handler\ProductHandler;
 use EasySlam\ProductBundle\Handler\PanierHandler;
 use EasySlam\ProductBundle\Form\Type\BuyProductType;
@@ -92,7 +93,11 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         $cmd = $this->getDoctrine()->getRepository("EasySlamProductBundle:Commands")
-            ->findBy(array('user' => $user), array('id' => 'DESC'), 1);
+            ->findBy(array('user' => $user, 'final' => false), array('id' => 'DESC'), 1);
+
+        if ($cmd == null) {
+            return array();
+        }
 
         $detailsCommands = $this->getDoctrine()->getRepository("EasySlamProductBundle:DetailsCommand")
             ->findBy(array('command' => $cmd));
@@ -101,11 +106,67 @@ class DefaultController extends Controller
     }
 
     /**
+     * Permet de supprimer un item du panier
+     *
+     * @Route(path="/panier/remove/{id}", name="removeItemFromPanier", requirements={"id" = "\d+"})
+     */
+    public function panierRemoveAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $detailsCmdRepository = $em->getRepository("EasySlamProductBundle:DetailsCommand");
+        $detailsCmd = $detailsCmdRepository->findOneBy(array('id' => $id));
+
+        $user = $this->getUser();
+        $cmdRepository = $em->getRepository("EasySlamProductBundle:Commands");
+        $cmd = $cmdRepository->findBy(array('user' => $user), array('id' => 'DESC'), 1);
+
+        if ($cmd[0]->getId() === $detailsCmd->getCommand()->getId()) {
+            $product = $detailsCmd->getProduct();
+            $product->setStock($product->getStock() + $detailsCmd->getQuantite());
+            $em->remove($detailsCmd);
+            $em->flush();
+        }
+
+
+        return $this->redirect($this->generateUrl('panier'));
+    }
+
+    /**
      * @Route(path="/panier/payment", name="payment")
      * @Template()
      */
-    public function paymentAction()
+    public function paymentAction(Request $request)
     {
-        return array();
+        $form = $this->createForm(new PaymentType());
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $user = $this->getUser();
+
+        $cmd = $em->getRepository("EasySlamProductBundle:Commands")
+            ->findBy(array('user' => $user, 'final' => false), array('id' => 'DESC'), 1);
+
+        if ($cmd == null) {
+            return $this->redirect($this->generateUrl('panier'));
+        }
+
+        $detailsCommands = $em->getRepository("EasySlamProductBundle:DetailsCommand")
+            ->findBy(array('command' => $cmd));
+
+        $prixHt = 0;
+        foreach ($detailsCommands as $detailsCommand) {
+            /** @var \EasySlam\ProductBundle\Entity\DetailsCommand $detailsCommand */
+            $prixHt = $prixHt + $detailsCommand->getPrice() * $detailsCommand->getQuantite();
+        }
+
+        /**
+         * TODO : change url to redirect
+         */
+        if ($request->get('Payment')['NumCB'] === "00001111222233334444") {
+            $cmd[0]->setFinal(true);
+            $em->flush();
+            return $this->redirect($this->generateUrl('panier'));
+        }
+
+        return array('command' => $cmd[0], 'prixHt' => $prixHt, 'form' => $form->createView());
     }
 }

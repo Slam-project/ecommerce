@@ -35,6 +35,16 @@ a:link {
     border-radius: 10px;
 }
 
+.button_payer {
+    width: 100px;
+    background-color: #287655;
+    margin: 0 auto 10px auto;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    padding: 5px 0;
+}
+
 #BuyProduct {
     float: right;
     padding-right: 20px;
@@ -190,6 +200,15 @@ label.required {
     padding-top: 10px;
 }
 
+.ligne {
+    border: solid 1px black;
+}
+
+#Payment label {
+    color: black;
+    font-weight: 100;
+}
+
 .product {
     margin-bottom: 28px;
     overflow-y: auto;
@@ -203,6 +222,10 @@ label.required {
     width: 100%;
 }
 
+.removeItem {
+    float: right;
+}
+
 .scuttleback {
     margin: 20px;
 }
@@ -214,6 +237,11 @@ label.required {
     padding: 14px;
     color: #318A66;
     border-radius: 10px;
+}
+
+.titleCommand {
+    margin: 0;
+    padding: 0;
 }
 
 .titleDesc {
