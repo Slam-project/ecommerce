@@ -189,6 +189,14 @@ iframe {
     background-color: #287655;
 }
 
+.footF {
+    padding-left: 130px;
+}
+
+.footS {
+    padding-right: 130px;
+}
+
 .society {
     float: left;
     height: 100px;
