@@ -283,7 +283,9 @@ p.middle {
 }
 
 .scuttleback {
-    margin: 20px;
+    margin: 20px 0px 20px 20px;
+    padding-left: 15%;
+    padding-right: 10%;
 }
 
 .searchPannel {
