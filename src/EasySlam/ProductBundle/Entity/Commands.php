@@ -126,7 +126,6 @@ class Commands
 
     public function __construct()
     {
-        $this->etat = new ArrayCollection();
         $this->detailsCommands = new ArrayCollection();
     }
 

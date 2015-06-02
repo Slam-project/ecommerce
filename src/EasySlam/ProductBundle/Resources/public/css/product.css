@@ -148,15 +148,26 @@ a:link {
 
 .DescLast {
     min-height: 40px;
-    margin: 15px 0px 15px 0px;
+    margin: 15px 0 15px 0;
 }
 
 .DescLast h5 {
-    margin: 3px 0px 10px 65px;
+    margin: 3px 0 10px 65px;
     padding: 5px;
     float: left;
     border: 1px solid #000000;
     color: #ffffff;
+}
+
+.space-bottom {
+    margin-bottom: 30px;
+}
+
+.etatCommand {
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
 }
 
 .endP p {
@@ -214,6 +225,22 @@ label.required {
     border: solid 1px black;
 }
 
+.middle {
+    text-align: center;
+}
+
+p.middle {
+    margin: 0;
+}
+
+.pastille {
+    float: left;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin: 3px 20px 0 10px;
+}
+
 #Payment {
     width: 200px;
     margin: auto;
@@ -248,6 +275,11 @@ label.required {
 
 .removeItem {
     float: right;
+}
+
+.sepCommand {
+    margin: 4px;
+    border: solid 1px grey;
 }
 
 .scuttleback {
