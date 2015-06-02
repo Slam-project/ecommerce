@@ -154,42 +154,14 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('panier'));
         }
 
-        $detailsCommands = $em->getRepository("EasySlamProductBundle:DetailsCommand")
-            ->findBy(array('command' => $cmd));
-
-        $prixHt = 0;
-        foreach ($detailsCommands as $detailsCommand) {
-            /** @var \EasySlam\ProductBundle\Entity\DetailsCommand $detailsCommand */
-            $prixHt = $prixHt + $detailsCommand->getPrice() * $detailsCommand->getQuantite();
-        }
+        $prixHt = $checkCommand = $this->get('payment_handler')->getPrixHt($cmd);
 
         $paymentForm = $request->get('Payment');
 
         if ($paymentForm != null) {
+            $checkCommand = $this->get('payment_handler')->finalCommand($cmd[0], $paymentForm);
 
-            $dateLiv = $paymentForm['dateLiv'];
-            $dateLiv = new \DateTime($dateLiv['year'] . '-' . $dateLiv['month'] . '-' . $dateLiv['day']);
-            $dateNow = new \DateTime("today");
-            $dateDiff = date_diff($dateNow, $dateLiv);
-
-            /**
-             * TODO : change url to redirect
-             */
-            if ($paymentForm['NumCB'] === "00001111222233334444" && $dateDiff->days > 2) {
-                /** @var \EasySlam\ProductBundle\Entity\Commands $cmd */
-                $cmd = $cmd[0];
-                $cmd->setAddressLiv($paymentForm['addressLiv']);
-                $cmd->setCityLiv($paymentForm['cityLiv']);
-                $cmd->setStateLiv($paymentForm['stateLiv']);
-                $cmd->setCodePostalLiv($paymentForm['codePostalLiv']);
-                $cmd->setDateLiv($dateLiv);
-                $cmd->setAddressFac($paymentForm['addressFac']);
-                $cmd->setCityFac($paymentForm['cityFac']);
-                $cmd->setStateFac($paymentForm['stateFac']);
-                $cmd->setCodePostalFac($paymentForm['codePostalFac']);
-                $cmd->setDatePayement(new \DateTime());
-                $cmd->setFinal(true);
-                $em->flush();
+            if ($checkCommand) {
                 return $this->redirect($this->generateUrl('manage_commandes'));
             }
         }
