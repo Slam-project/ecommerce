@@ -137,6 +137,8 @@ a:link {
 .DescFirst img {
     margin-left: 25px;
     background-color: #ffffff;
+    max-height: 270px;
+    max-width: 270px;
 }
 
 .DescFirst p {
@@ -154,6 +156,13 @@ a:link {
     float: left;
     border: 1px solid #000000;
     color: #ffffff;
+}
+
+.endP p {
+    text-align: center;
+    color: #292A2B;
+    border: 2px solid #ffffff;
+    font-size: 20px;
 }
 
 .infoProduct {
