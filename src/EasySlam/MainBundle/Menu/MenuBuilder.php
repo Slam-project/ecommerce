@@ -39,6 +39,7 @@ class MenuBuilder
             $menu->addChild('Inscription', array('route' => 'fos_user_registration_register'));
             $menu->addChild('Connexion', array('route' => 'fos_user_security_login'));
         } else {
+            $menu->addChild('Historique des commandes', array('route' => 'manage_commandes'));
             $menu->addChild('Déconnexion', array('route' => 'fos_user_security_logout'));
         }
 
