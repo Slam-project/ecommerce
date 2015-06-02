@@ -16,7 +16,13 @@
                         <h5>Prix unitaire : {{ product.price }} €</h5>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                        {{ form(panier) }}
+                        {% if product.stock > 0 %}
+                            {{ form(panier) }}
+                        {% else %}
+                            <div class="endP">
+                                <p>Les stocks pour ce produit sont malheureusement épuisés</p>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div style="clear: both;"></div>

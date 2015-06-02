@@ -9,9 +9,8 @@
         </div>
         <div class="promo">
             <div class="container">
-                <div class="promoBox col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="promoBox col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="pBox">
-                        Plante de la semaine :
                         {#
                             la vérification de l'existance d'un attribut est très important.
                             Si l'attribut n'existe pas on aura une erreur de symfony qui cherche à afficher quelquechose
@@ -19,33 +18,98 @@
                             Pense bien à vérifier l'attribut comme je l'ai fait ci-dessous.
                          #}
                         {% if planteSemaine.name is defined %}
-                            {{ planteSemaine.name }}
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>PLANTE DE LA SEMAINE</p>
+                            </div>
+                            <a href="{{ path("productInfo", {"id": planteSemaine.id}) }}">
+                                <img src="{{ vich_uploader_asset(planteSemaine, 'imageFile') }}">
+                            </a>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nom : {{ planteSemaine.name }}</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Prix normal : <font color="black"> <del> {{ planteSemaine.price }} € </del> </font></p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nouveau Prix :</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Stock : {{ planteSemaine.stock }} pièces</p>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
-                <div class="promoBox col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="promoBox col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="pBox">
-                        Plante du mois :
                         {% if planteMois.name is defined %}
-                            {{ planteMois.name }}
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>PLANTE DU MOIS</p>
+                            </div>
+                            <a href="{{ path("productInfo", {"id": planteMois.id}) }}">
+                                <img src="{{ vich_uploader_asset(planteMois, 'imageFile') }}">
+                            </a>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nom : {{ planteMois.name }}</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Prix normal : <font color="black"> <del> {{ planteMois.price }} € </del> </font></p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nouveau Prix :</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Stock : {{ planteMois.stock }} pièces</p>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
             </div>
             <div class="container">
-                <div class="promoBox col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="promoBox col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="pBox">
-                        Accessoire de la semaine :
                         {% if accessoireSemaine.name is defined %}
-                            {{ accessoireSemaine.name }}
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>ACCESSOIRE DE LA SEMAINE</p>
+                            </div>
+                            <a href="{{ path("productInfo", {"id": accessoireSemaine.id}) }}">
+                                <img src="{{ vich_uploader_asset(accessoireSemaine, 'imageFile') }}">
+                            </a>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nom : {{ accessoireSemaine.name }}</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Prix normal : <font color="black"> <del> {{ accessoireSemaine.price }} € </del> </font></p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nouveau Prix :</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Stock : {{ accessoireSemaine.stock }} pièces</p>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
-                <div class="promoBox col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="promoBox col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="pBox">
-                        Accessoire du mois :
                         {% if accessoireMois.name is defined %}
-                            {{ accessoireMois.name }}
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>ACCESSOIRE DU MOIS</p>
+                            </div>
+                            <a href="{{ path("productInfo", {"id": accessoireMois.id}) }}">
+                                <img src="{{ vich_uploader_asset(accessoireMois, 'imageFile') }}">
+                            </a>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nom : {{ accessoireMois.name }}</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Prix normal : <font color="black"> <del> {{ accessoireMois.price }} € </del> </font></p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Nouveau Prix :</p>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                <p>Stock : {{ accessoireMois.stock }} pièces</p>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
