@@ -54,7 +54,7 @@ class ProductHandler
      */
     public function getAllProducts($page)
     {
-        $products = $this->productRepository->findBy(array(), null, 20, ($page - 1) * 20);
+        $products = $this->productRepository->findBy(array(), null, 13, ($page - 1) * 12);
 
         return $products;
     }
@@ -78,7 +78,7 @@ class ProductHandler
             $query->orWhere('cat.id = ' . $criterias[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 
@@ -104,7 +104,7 @@ class ProductHandler
             $query->orWhere('col.id = ' . $criterias[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 
@@ -130,7 +130,7 @@ class ProductHandler
             $query->orWhere('typ.id = ' . $criterias[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 
@@ -163,7 +163,7 @@ class ProductHandler
             $query->orWhere('col.id = ' . $criteriasColor[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 
@@ -197,7 +197,7 @@ class ProductHandler
             $query->orWhere('col.id = ' . $criteriasColor[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 
@@ -231,7 +231,7 @@ class ProductHandler
             $query->orWhere('typ.id = ' . $criteriasType[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 
@@ -272,7 +272,7 @@ class ProductHandler
             $query->orWhere('col.id = ' . $criteriasColor[$i]);
         }
 
-        $query->setFirstResult(($page - 1) * 12)->setMaxResults(12);
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
         $products = $query->getQuery()->getResult();
 

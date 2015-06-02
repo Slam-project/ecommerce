@@ -14,7 +14,18 @@
                 </div>
                 <div class="DescLast row">
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <h5>Prix unitaire : {{ product.price }} €</h5>
+                        <h5>
+                            Prix unitaire :
+
+                            {% if product.isPlanteSemaine or product.isAccessoireSemaine %}
+                                <span style="color:#000000;"><del>{{ product.price }}€</del></span> {{ product.price / 2 }} €
+                            {% elseif product.isPlanteMois or product.isAccessoireMois %}
+                                <span style="color:#000000;"><del>{{ product.price }}€</del></span> {{ product.price / 10 * 8 }}
+                            {% else %}
+                                {{ product.price }} €
+                            {% endif %}
+
+                        </h5>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                         {% if product.stock > 0 %}

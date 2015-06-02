@@ -19,7 +19,7 @@ class CommandAdmin extends Admin
                 array(
                     'label' => 'Commande',
                     'attr' => array(
-                        'readonly' => true
+                        'readonly' => false
                     )
                 )
             )

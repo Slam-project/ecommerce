@@ -21,7 +21,7 @@ class DefaultController extends Controller
      * @param int page
      *
      * @Route(path="/nos-produits/", name="product")
-     * @Route(path="/nos-produits/{page}", defaults={"page"="1"}, requirements={"page" = "\d+"})
+     * @Route(path="/nos-produits/{page}", defaults={"page"="1"}, requirements={"page" = "\d+"}, name="product_with_page")
      * @Template()
      *
      * @return array
@@ -57,10 +57,14 @@ class DefaultController extends Controller
             }
         }
 
+        if (empty($products)) {
+            return $this->redirect($this->generateUrl('product'));
+        }
+
         $form = $this->createForm(new SearchType());
         $form->handleRequest($request);
 
-        return array("products" => $products, 'formSearch' => $form->createView());
+        return array("products" => $products, 'formSearch' => $form->createView(), 'page' => $page, 'search' => $request->getQueryString());
     }
 
     /**
