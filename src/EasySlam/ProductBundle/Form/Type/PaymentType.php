@@ -35,7 +35,7 @@ class PaymentType extends AbstractType
                 'required' => true
             ))
             ->add('dateLiv', 'date', array(
-                'label' => 'Date de livraison : ',
+                'label' => 'Date de livraison (minimum 3 jours après date d\'achat) : ',
                 'input' => 'datetime',
                 'widget' => 'choice',
                 'required' => true,

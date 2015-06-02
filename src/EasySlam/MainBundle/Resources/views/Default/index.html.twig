@@ -31,7 +31,7 @@
                                 <p>Prix normal : <font color="black"> <del> {{ planteSemaine.price }} € </del> </font></p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                <p>Nouveau Prix :</p>
+                                <p>Nouveau Prix : {{ planteSemaine.price / 2 }} €</p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                 <p>Stock : {{ planteSemaine.stock }} pièces</p>
@@ -55,7 +55,7 @@
                                 <p>Prix normal : <font color="black"> <del> {{ planteMois.price }} € </del> </font></p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                <p>Nouveau Prix :</p>
+                                <p>Nouveau Prix  {{ planteMois.price / 10 * 8 }} €:</p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                 <p>Stock : {{ planteMois.stock }} pièces</p>
@@ -81,7 +81,7 @@
                                 <p>Prix normal : <font color="black"> <del> {{ accessoireSemaine.price }} € </del> </font></p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                <p>Nouveau Prix :</p>
+                                <p>Nouveau Prix : {{ accessoireSemaine.price / 2 }} €</p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                 <p>Stock : {{ accessoireSemaine.stock }} pièces</p>
@@ -105,7 +105,7 @@
                                 <p>Prix normal : <font color="black"> <del> {{ accessoireMois.price }} € </del> </font></p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                <p>Nouveau Prix :</p>
+                                <p>Nouveau Prix : {{ accessoireSemaine.price / 10 * 8 }}</p>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                 <p>Stock : {{ accessoireMois.stock }} pièces</p>

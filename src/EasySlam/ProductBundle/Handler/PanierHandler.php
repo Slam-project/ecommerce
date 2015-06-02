@@ -50,6 +50,7 @@ class PanierHandler
         $user = $this->securityContext->getToken()->getUser();
 
         $productRepository = $this->em->getRepository('EasySlamProductBundle:Product');
+        /** @var \EasySlam\ProductBundle\Entity\Product $product */
         $product = $productRepository->findOneBy(array('id' => $id));
 
         if($qte > $product->getStock()) {
@@ -80,7 +81,16 @@ class PanierHandler
             $detailsCommand = new DetailsCommand();
             $detailsCommand->setName($product->getName());
             $detailsCommand->setDescription($product->getDescription());
-            $detailsCommand->setPrice($product->getPrice());
+
+            if ($product->getIsPlanteSemaine() || $product->getIsAccessoireSemaine()) {
+                $detailsCommand->setPrice($product->getPrice() / 2);
+            } elseif ($product->getIsPlanteMois() || $product->getIsAccessoireMois()) {
+                $detailsCommand->setPrice($product->getPrice() / 10 * 8);
+            } else {
+                $detailsCommand->setPrice($product->getPrice());
+            }
+
+
             $detailsCommand->setQuantite($qte);
             $detailsCommand->setCommand($command);
             $detailsCommand->setProduct($product);
