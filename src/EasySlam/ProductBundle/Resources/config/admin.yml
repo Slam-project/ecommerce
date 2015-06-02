@@ -75,3 +75,14 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [EasySlamProductBundle]]
+
+    sonata.admin.demande:
+        class: EasySlam\ProductBundle\Admin\DemandeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Gestion des stocks" }
+        arguments:
+            - ~
+            - EasySlam\ProductBundle\Entity\Demande
+            - ~
+        calls:
+            - [ setTranslationDomain, [EasySlamProductBundle]]

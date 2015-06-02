@@ -29,19 +29,21 @@
 
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 board">
+            {% if page > 1 or products[12] is defined %}
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 board2">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     {% if page > 1 %}
-                        <a href="{{ path('product_with_page', {'page': page - 1}) }}?{{ search }}">page prec</a>
+                        <a class="bFirst" href="{{ path('product_with_page', {'page': page - 1}) }}?{{ search }}">Page prec</a>
                     {% endif %}
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     {% if products[12] is defined %}
-                        <a href="{{ path('product_with_page', {'page': page + 1}) }}?{{ search }}">page suiv</a>
+                        <a class="bLast" href="{{ path('product_with_page', {'page': page + 1}) }}?{{ search }}">Page suiv</a>
                     {% endif %}
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
     <div class="barre2"></div>
