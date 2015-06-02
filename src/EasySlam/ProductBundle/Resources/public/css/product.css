@@ -17,6 +17,16 @@ a:link {
     background-color: #287655;
 }
 
+.bFirst {
+    float: right;
+    color: white;
+}
+
+.bLast {
+    float: left;
+    color: #f5f5f5;
+}
+
 .blackfilter {
     color: #ffffff;
     position: absolute;
@@ -32,6 +42,12 @@ a:link {
 .board {
     background-color: #113325;
     padding-top: 28px;
+    border-radius: 10px;
+}
+
+.board2 {
+    background-color: #292A2B;
+    margin-top: 20px;
     border-radius: 10px;
 }
 

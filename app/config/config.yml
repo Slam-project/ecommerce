@@ -102,6 +102,7 @@ sonata_admin:
                 items:
                     - sonata.admin.product
                     - sonata.admin.commands
+                    - sonata.admin.demande
             easyslam.admin.group.variante:
                 label: Variantes
                 label_catalogue: EasySlamProductBundle
@@ -115,6 +116,7 @@ sonata_admin:
                 label_catalogue: EasySlamUserBundle
                 items:
                     - sonata.admin.user
+                    - sonata.admin.fournisseur
 
 imports:
     - { resource: @EasySlamProductBundle/Resources/config/admin.yml }

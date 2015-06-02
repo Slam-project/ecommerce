@@ -9,3 +9,14 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [EasySlamUserBundle]]
+
+    sonata.admin.fournisseur:
+            class: EasySlam\UserBundle\Admin\FournisseurAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: "Content", label: "Fournisseurs" }
+            arguments:
+                - ~
+                - EasySlam\UserBundle\Entity\Fournisseur
+                - ~
+            calls:
+                - [ setTranslationDomain, [EasySlamUserBundle]]

@@ -122,6 +122,12 @@ class Product
     protected $isAccessoireMois;
 
     /**
+     * @var \EasySlam\ProductBundle\Entity\Demande $demande
+     * @ORM\OneToMany(targetEntity="Demande", mappedBy="product")
+     */
+    protected $demandes;
+
+    /**
      * Default constructor
      */
     public function __construct()
@@ -130,6 +136,7 @@ class Product
         $this->variantesColor = new ArrayCollection();
         $this->variantesType = new ArrayCollection();
         $this->variantesCategory = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
     }
 
     /**
@@ -549,5 +556,33 @@ class Product
     public function getIsAccessoireMois()
     {
         return $this->isAccessoireMois;
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\Demande $demande
+     */
+    public function addDemande(Demande $demande)
+    {
+        if ($demande->getProduct() == $this) {
+            $this->demandes[] = $demande;
+        }
+    }
+
+    /**
+     * @param \EasySlam\ProductBundle\Entity\Demande $demande
+     */
+    public function removeDemande(Demande $demande)
+    {
+        if ($demande->getProduct() != $this) {
+            $this->demandes->removeElement($this);
+        }
+    }
+
+    /**
+     * @return ArrayCollection|Demande
+     */
+    public function getDemandes()
+    {
+        return $this->demandes;
     }
 }
