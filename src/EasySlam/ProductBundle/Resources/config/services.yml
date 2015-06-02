@@ -6,3 +6,7 @@ services:
     panier_handler:
         class: EasySlam\ProductBundle\Handler\PanierHandler
         arguments: ["@doctrine.orm.entity_manager", "@security.context"]
+
+    payment_handler:
+        class: EasySlam\ProductBundle\Handler\PaymentHandler
+        arguments: ["@doctrine.orm.entity_manager", "@security.context"]
