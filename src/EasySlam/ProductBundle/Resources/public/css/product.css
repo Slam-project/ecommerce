@@ -213,6 +213,20 @@ label.required {
     border: solid 1px black;
 }
 
+#Payment {
+    width: 200px;
+    margin: auto;
+}
+
+#Payment button {
+    margin: 10px 60px;
+    width: 80px;
+}
+
+#Payment input {
+    width: 100%;
+}
+
 #Payment label {
     color: black;
     font-weight: 100;
