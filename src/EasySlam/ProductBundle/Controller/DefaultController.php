@@ -58,6 +58,7 @@ class DefaultController extends Controller
         }
 
         $form = $this->createForm(new SearchType());
+        $form->handleRequest($request);
 
         return array("products" => $products, 'formSearch' => $form->createView());
     }
@@ -162,14 +163,38 @@ class DefaultController extends Controller
             $prixHt = $prixHt + $detailsCommand->getPrice() * $detailsCommand->getQuantite();
         }
 
-        /**
-         * TODO : change url to redirect
-         */
-        if ($request->get('Payment')['NumCB'] === "00001111222233334444") {
-            $cmd[0]->setFinal(true);
-            $em->flush();
-            return $this->redirect($this->generateUrl('panier'));
+        $paymentForm = $request->get('Payment');
+
+        if ($paymentForm != null) {
+
+            $dateLiv = $paymentForm['dateLiv'];
+            $dateLiv = new \DateTime($dateLiv['year'] . '-' . $dateLiv['month'] . '-' . $dateLiv['day']);
+            $dateNow = new \DateTime("today");
+            $dateDiff = date_diff($dateNow, $dateLiv);
+
+            /**
+             * TODO : change url to redirect
+             */
+            if ($paymentForm['NumCB'] === "00001111222233334444" && $dateDiff->days > 2) {
+                /** @var \EasySlam\ProductBundle\Entity\Commands $cmd */
+                $cmd = $cmd[0];
+                $cmd->setAddressLiv($paymentForm['addressLiv']);
+                $cmd->setCityLiv($paymentForm['cityLiv']);
+                $cmd->setStateLiv($paymentForm['stateLiv']);
+                $cmd->setCodePostalLiv($paymentForm['codePostalLiv']);
+                $cmd->setDateLiv($dateLiv);
+                $cmd->setAddressFac($paymentForm['addressFac']);
+                $cmd->setCityFac($paymentForm['cityFac']);
+                $cmd->setStateFac($paymentForm['stateFac']);
+                $cmd->setCodePostalFac($paymentForm['codePostalFac']);
+                $cmd->setDatePayement(new \DateTime());
+                $cmd->setFinal(true);
+                $em->flush();
+                return $this->redirect($this->generateUrl('manage_commandes'));
+            }
         }
+
+        $form->handleRequest($request);
 
         return array('command' => $cmd[0], 'prixHt' => $prixHt, 'form' => $form->createView());
     }

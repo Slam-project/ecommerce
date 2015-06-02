@@ -90,7 +90,7 @@ sonata_block:
 
 
 sonata_admin:
-    title:  EasySlam ADMIN
+    title:  Floris ADMIN
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
         list: SonataAdminBundle:CRUD:base_list.html.twig
