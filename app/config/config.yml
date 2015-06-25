@@ -85,12 +85,12 @@ sonata_block:
         sonata.block.service.text:
         sonata.admin.block.admin_list:
             contexts:   [admin]
-        sonata.admin.block.search_result::
+        sonata.admin.block.search_result:
             contexts:   [admin]
 
 
 sonata_admin:
-    title:  EasySlam ADMIN
+    title:  Floris ADMIN
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
         list: SonataAdminBundle:CRUD:base_list.html.twig
@@ -102,10 +102,12 @@ sonata_admin:
                 items:
                     - sonata.admin.product
                     - sonata.admin.commands
+                    - sonata.admin.demande
             easyslam.admin.group.variante:
                 label: Variantes
                 label_catalogue: EasySlamProductBundle
                 items:
+                    - sonata.admin.variantecategory
                     - sonata.admin.variantecolor
                     - sonata.admin.variantetype
                     - sonata.admin.etatcommand
@@ -114,6 +116,7 @@ sonata_admin:
                 label_catalogue: EasySlamUserBundle
                 items:
                     - sonata.admin.user
+                    - sonata.admin.fournisseur
 
 imports:
     - { resource: @EasySlamProductBundle/Resources/config/admin.yml }

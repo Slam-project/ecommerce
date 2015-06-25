@@ -1,8 +1,46 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <div class="container">
-        <h4>{{ product.name }}</h4>
-        {{ product.description }}
+    <div class="container" style="margin-top: 20px;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 searchPannel">
+            <div class="titleDesc">
+                <h4>{{ product.name }}</h4>
+            </div>
+            <div class="contentDesc">
+                <div class="DescFirst row">
+                    <img src="{{ vich_uploader_asset(product, 'imageFile') }}" alt="{{ product.name }}" />
+                    <p>{{ product.description }}</p>
+                    <p style="color: #ffffff">Stock disponible : {{ product.stock }}</p>
+                </div>
+                <div class="DescLast row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <h5>
+                            Prix unitaire :
+
+                            {% if product.isPlanteSemaine or product.isAccessoireSemaine %}
+                                <span style="color:#000000;"><del>{{ product.price }} €</del></span>  {{ product.price / 2 }} €
+                            {% elseif product.isPlanteMois or product.isAccessoireMois %}
+                                <span style="color:#000000;"><del>{{ product.price }} €</del></span>  {{ product.price / 10 * 8 }} €
+                            {% else %}
+                                {{ product.price }} €
+                            {% endif %}
+
+                        </h5>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                        {% if product.stock > 0 %}
+                            {{ form(panier) }}
+                        {% else %}
+                            <div class="endP">
+                                <p>Les stocks pour ce produit sont malheureusement épuisés</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+
+        </div>
     </div>
+    <div class="barre2"></div>
 {% endblock %}

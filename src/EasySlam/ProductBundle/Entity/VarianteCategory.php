@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * VarianteType
+ * VarianteCategory
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class VarianteType
+class VarianteCategory
 {
     /**
      * @var integer
@@ -31,7 +31,7 @@ class VarianteType
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Product", inversedBy="variantesType", cascade="persist")
+     * @ORM\ManyToMany(targetEntity="Product", inversedBy="variantesCategory", cascade="persist")
      */
     private $products;
 
@@ -44,7 +44,7 @@ class VarianteType
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -55,7 +55,7 @@ class VarianteType
      * Set name
      *
      * @param string $name
-     * @return VarianteType
+     * @return VarianteCategory
      */
     public function setName($name)
     {
@@ -67,7 +67,7 @@ class VarianteType
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -85,8 +85,8 @@ class VarianteType
 
         $this->products[] = $product;
 
-        if (!$product->getVarianteType()->contains($this)) {
-            $product->addVarianteType($this);
+        if (!$product->getVarianteCategory()->contains($this)) {
+            $product->addVarianteCategory($this);
         }
 
         return;
@@ -116,7 +116,7 @@ class VarianteType
     public function __toString()
     {
         if ($this->getName() == null) {
-            return "Nouveau type";
+            return "Nouvelle catégorie";
         }
         return $this->getName();
     }

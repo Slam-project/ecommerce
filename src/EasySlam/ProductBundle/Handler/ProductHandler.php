@@ -52,9 +52,35 @@ class ProductHandler
      * @param array[string]
      * @return array[\EasySlam\ProductBundle\Entity\Product]
      */
-    public function getAllProducts()
+    public function getAllProducts($page)
     {
-        $products = $this->productRepository->findAll();
+        $products = $this->productRepository->findBy(array(), null, 13, ($page - 1) * 12);
+
+        return $products;
+    }
+
+    /**
+     * Get all products which have category in criterias
+     *
+     * @param array $criterias
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getProductsByCategory($page, $criterias = array())
+    {
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesCategory', 'cat')
+            ->where('cat.id = ' . $criterias[0]);
+
+        for ($i = 1; $i < count($criterias); $i++) {
+            $query->orWhere('cat.id = ' . $criterias[$i]);
+        }
+
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
+
+        $products = $query->getQuery()->getResult();
 
         return $products;
     }
@@ -66,22 +92,21 @@ class ProductHandler
      * @return array|\Doctrine\DBAL\Driver\Statement
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getProductsByColor($criterias = array())
+    public function getProductsByColor($page, $criterias = array())
     {
-        $where = 'VC.id = ' . $criterias[0];
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesColor', 'col')
+            ->where('col.id = ' . $criterias[0]);
 
         for ($i = 1; $i < count($criterias); $i++) {
-            $where .= ' OR VC.id = ' . $criterias[$i];
+            $query->orWhere('col.id = ' . $criterias[$i]);
         }
 
-        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteColor VC
-              INNER JOIN EasySlamProductBundle:Product p
-              WHERE VC MEMBER OF p.variantesColor
-              AND ' . $where . '
-              '
-        );
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
-        $products = $products->getResult();
+        $products = $query->getQuery()->getResult();
 
         return $products;
     }
@@ -93,22 +118,21 @@ class ProductHandler
      * @return array|\Doctrine\DBAL\Driver\Statement
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getProductsByType($criterias = array())
+    public function getProductsByType($page, $criterias = array())
     {
-        $where = 'VT.id = ' . $criterias[0];
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesType', 'typ')
+            ->where('typ.id = ' . $criterias[0]);
 
         for ($i = 1; $i < count($criterias); $i++) {
-            $where .= ' OR VT.name = ' . $criterias[$i];
+            $query->orWhere('typ.id = ' . $criterias[$i]);
         }
 
-        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteType VT
-              INNER JOIN EasySlamProductBundle:Product p
-              WHERE VT MEMBER OF p.variantesType
-              AND ' . $where . '
-              '
-        );
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
 
-        $products = $products->getResult();
+        $products = $query->getQuery()->getResult();
 
         return $products;
     }
@@ -121,28 +145,136 @@ class ProductHandler
      * @return array|\Doctrine\DBAL\Driver\Statement
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getProductsByColorType($criteriasColor = array(), $criteriasType = array())
+    public function getProductsByColorType($page, $criteriasColor = array(), $criteriasType = array())
     {
-        $where = '( VC.id = ' . $criteriasColor[0];
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesType', 'typ')
+            ->innerJoin('p.variantesColor', 'col')
+            ->where('typ.id = ' . $criteriasType[0]);
 
-        for ($i = 1; $i < count($criteriasColor); $i++) {
-            $where .= ' OR VC.id = ' . $criteriasColor[$i];
-        }
-
-        $where .= ') AND ( VT.id = ' . $criteriasType[0];
         for ($i = 1; $i < count($criteriasType); $i++) {
-            $where .= ' OR VT.id = ' . $criteriasType[$i];
+            $query->orWhere('typ.id = ' . $criteriasType[$i]);
         }
-        $where .= ')';
 
-        $products = $this->em->createQuery('SELECT p FROM EasySlamProductBundle:VarianteType VT
-              INNER JOIN EasySlamProductBundle:Product p WHERE VT MEMBER OF p.variantesType
-              INNER JOIN EasySlamProductBundle:VarianteColor VC WHERE VC MEMBER OF p.variantesColor
-              AND ' . $where . '
-              '
-        );
+        $query->andWhere('col.id = ' . $criteriasColor[0]);
+        for ($i = 1; $i < count($criteriasColor); $i++) {
+            $query->orWhere('col.id = ' . $criteriasColor[$i]);
+        }
 
-        $products = $products->getResult();
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
+
+        $products = $query->getQuery()->getResult();
+
+        return $products;
+    }
+
+    /**
+     * Get all the product which have colours and type in criterias
+     *
+     * @param int $page
+     * @param array $criteriasColor
+     * @param array $criteriasCategory
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getProductsByColorCategory($page, $criteriasColor = array(), $criteriasCategory = array())
+    {
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesCategory', 'cat')
+            ->innerJoin('p.variantesColor', 'col')
+            ->where('cat.id = ' . $criteriasCategory[0]);
+
+        for ($i = 1; $i < count($criteriasCategory); $i++) {
+            $query->orWhere('cat.id = ' . $criteriasCategory[$i]);
+        }
+
+        $query->andWhere('col.id = ' . $criteriasColor[0]);
+        for ($i = 1; $i < count($criteriasColor); $i++) {
+            $query->orWhere('col.id = ' . $criteriasColor[$i]);
+        }
+
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
+
+        $products = $query->getQuery()->getResult();
+
+        return $products;
+    }
+
+    /**
+     * Get all the product which have colours and type in criterias
+     *
+     * @param int $page
+     * @param array $criteriasType
+     * @param array $criteriasCategory
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getProductsByTypeCategory($page, $criteriasType = array(), $criteriasCategory = array())
+    {
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesCategory', 'cat')
+            ->innerJoin('p.variantesType', 'typ')
+            ->where('cat.id = ' . $criteriasCategory[0]);
+
+        for ($i = 1; $i < count($criteriasCategory); $i++) {
+            $query->orWhere('cat.id = ' . $criteriasCategory[$i]);
+        }
+
+        $query->andWhere('typ.id = ' . $criteriasType[0]);
+        for ($i = 1; $i < count($criteriasType); $i++) {
+            $query->orWhere('typ.id = ' . $criteriasType[$i]);
+        }
+
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
+
+        $products = $query->getQuery()->getResult();
+
+        return $products;
+    }
+
+    /**
+     * Get all the product which have colours and type in criterias
+     *
+     * @param int $page
+     * @param array $criteriasColor
+     * @param array $criteriasType
+     * @param array $criteriasCategory
+     * @return array|\Doctrine\DBAL\Driver\Statement
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getProductsByColorTypeCategory($page, $criteriasColor = array(), $criteriasType = array(), $criteriasCategory = array())
+    {
+        $query = $this->em->createQueryBuilder();
+        $query->select('p')
+            ->from('EasySlamProductBundle:Product', 'p')
+            ->innerJoin('p.variantesColor', 'col')
+            ->innerJoin('p.variantesCategory', 'cat')
+            ->innerJoin('p.variantesType', 'typ')
+            ->where('cat.id = ' . $criteriasCategory[0]);
+
+        for ($i = 1; $i < count($criteriasCategory); $i++) {
+            $query->orWhere('cat.id = ' . $criteriasCategory[$i]);
+        }
+
+        $query->andWhere('typ.id = ' . $criteriasType[0]);
+        for ($i = 1; $i < count($criteriasType); $i++) {
+            $query->orWhere('typ.id = ' . $criteriasType[$i]);
+        }
+
+        $query->andWhere('col.id = ' . $criteriasColor[0]);
+        for ($i = 1; $i < count($criteriasColor); $i++) {
+            $query->orWhere('col.id = ' . $criteriasColor[$i]);
+        }
+
+        $query->setFirstResult(($page - 1) * 12)->setMaxResults(13);
+
+        $products = $query->getQuery()->getResult();
 
         return $products;
     }

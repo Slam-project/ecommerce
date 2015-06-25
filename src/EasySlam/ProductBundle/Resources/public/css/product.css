@@ -12,14 +12,31 @@ a:link {
     background-color: #287655;
 }
 
+.barre3 {
+    height: 30px;
+    background-color: #287655;
+}
+
+.bFirst {
+    float: right;
+    color: white;
+}
+
+.bLast {
+    float: left;
+    color: #f5f5f5;
+}
+
 .blackfilter {
     color: #ffffff;
     position: absolute;
-    padding-left: 5px;
-    padding-top: 45px;
-    width: 84%;
+    padding: 15px 5px 0px 5px;
+    border-radius: 5px;
+    margin-top: 30px;
+    width: 89%;
     display: none;
     text-align: justify;
+    background-color: #292A2B;
 }
 
 .board {
@@ -28,8 +45,156 @@ a:link {
     border-radius: 10px;
 }
 
-.infoProduct {
+.board2 {
+    background-color: #292A2B;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.button_payer {
+    width: 100px;
+    background-color: #287655;
+    margin: 0 auto 10px auto;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    padding: 5px 0;
+}
+
+#BuyProduct {
+    float: right;
+    padding-right: 20px;
+}
+
+#BuyProduct button {
+    padding: 10px;
+}
+
+#BuyProduct input {
+    margin-right: 20px;
+}
+
+#BuyProduct label {
+    padding-right: 10px;
+}
+
+#BuyProduct > div {
+    float: left;
+}
+
+.contentDesc {
+    background-color: #318A66;
+    border: 1px solid #292A2B;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 275px;
+}
+
+.contentDesc img {
+    float: left;
+    margin: 10px;
+    height: 94%;
+    border: 1px solid #292A2B;
+    background-color: #ffffff;
+}
+
+.contentDesc h5 {
+    color: #292A2B;
+    background-color: red;
+}
+
+.contentDesc p {
+    color: #292A2B;
+    text-align: justify;
+    margin: 12px 10px 0px 10px;
+}
+
+.contentScuttle {
+    border: 4px double #318A66;
+    border-radius: 15px;
+    min-height: 150px;
+    overflow: auto;
+}
+
+.contentScuttle hr {
+    margin: 20px;
+}
+
+.contentScuttle h1 {
+    text-align: center;
+    font-family: Plant2;
+    color: #292A2B;
+    font-size: 60px;
+    margin: 6px 0px 0px 0px;
+}
+
+.contentScuttle h2 {
+    text-align: center;
+    font-size: 20px;
+    padding: 28px 0px 0px 0px;
+}
+
+.contentScuttle p {
+    margin-left: 0px;
+    text-align: center;
+}
+
+.contImg {
     padding: 5px;
+}
+
+.contImg img {
+    background-color: #ffffff;
+}
+
+.DescFirst {
+    min-height: 190px;
+}
+
+.DescFirst img {
+    margin-left: 25px;
+    background-color: #ffffff;
+    max-height: 270px;
+    max-width: 270px;
+}
+
+.DescFirst p {
+    padding: 0px 15px 0px 15px;
+}
+
+.DescLast {
+    min-height: 40px;
+    margin: 15px 0 15px 0;
+}
+
+.DescLast h5 {
+    margin: 3px 0 10px 55px;
+    padding: 5px;
+    float: left;
+    border: 2px solid #292A2B;
+    color: #ffffff;
+}
+
+.space-bottom {
+    margin-bottom: 30px;
+}
+
+.etatCommand {
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.endP p {
+    text-align: center;
+    color: #292A2B;
+    border: 2px solid #ffffff;
+    font-size: 20px;
+}
+
+.infoProduct {
+    /*padding: 5px;*/
     background-color: #318A66;
     height: 100%;
     border-radius: 5px;
@@ -42,7 +207,7 @@ a:link {
 
 .infoProduct h4 {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .infoProduct:hover>a h4 {
@@ -72,8 +237,48 @@ label.required {
     padding-top: 10px;
 }
 
+.ligne {
+    border: solid 1px black;
+}
+
+.middle {
+    text-align: center;
+}
+
+p.middle {
+    margin: 0;
+}
+
+.pastille {
+    float: left;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin: 3px 20px 0 10px;
+}
+
+#Payment {
+    width: 200px;
+    margin: auto;
+}
+
+#Payment button {
+    margin: 10px 60px;
+    width: 80px;
+}
+
+#Payment input {
+    width: 100%;
+}
+
+#Payment label {
+    color: black;
+    font-weight: 100;
+}
+
 .product {
     margin-bottom: 28px;
+    overflow-y: auto;
 }
 
 #ProductSearch_Rechercher {
@@ -84,6 +289,21 @@ label.required {
     width: 100%;
 }
 
+.removeItem {
+    float: right;
+}
+
+.sepCommand {
+    margin: 4px;
+    border: solid 1px grey;
+}
+
+.scuttleback {
+    margin: 20px 0px 20px 20px;
+    padding-left: 15%;
+    padding-right: 10%;
+}
+
 .searchPannel {
     float: left;
     background-color: #113325;
@@ -91,4 +311,21 @@ label.required {
     padding: 14px;
     color: #318A66;
     border-radius: 10px;
+}
+
+.titleCommand {
+    margin: 0;
+    padding: 0;
+}
+
+.titleDesc {
+    text-align: center;
+    border: 1px solid #318A66;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #292A2B;
+}
+
+.total {
+    margin-bottom: 10px;
 }

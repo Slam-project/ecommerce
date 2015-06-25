@@ -115,6 +115,9 @@ class VarianteColor
      */
     public function __toString()
     {
+        if ($this->getName() == null) {
+            return "Nouvelle couleur";
+        }
         return $this->getName();
     }
 }

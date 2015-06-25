@@ -2,6 +2,61 @@
 
 {% block body %}
 
-    PANIER
+    <div class="container scuttleback">
+        <div class="contentScuttle">
+
+            <h1>Mon panier</h1>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <hr class="ligne">
+            </div>
+
+            {% if command is defined %}
+                <h2 class="titleCommand">Commande num&eacute;ro {{ command.id }} </h2>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <hr class="ligne">
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% set prixHt = 0 %}
+                    {% for detailsCommand in detailsCommands %}
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+                            <p> Libellé : {{ detailsCommand.name }} </p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+                            <p> Prix unitaire : {{ detailsCommand.price }} €</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+                            <p> Quantité : {{ detailsCommand.quantite }}
+                                <a href="{{ path ("removeItemFromPanier", {'id': detailsCommand.id}) }}" class="removeItem">
+                                    Enlever du panier
+                                </a>
+                            </p>
+
+                        </div>
+
+                        {% set prixHt = prixHt + detailsCommand.price * detailsCommand.quantite %}
+                    {% endfor %}
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <hr>
+                </div>
+                <div class="total col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% if detailsCommands|length > 0 %}
+                        <p> Total HT : <font color="red">{{ prixHt }}</font></h3> €</p>
+                        <a href="{{ path("payment") }}"><div class="button_payer">Payer</div></a>
+                    {% else %}
+                        <p>Vous devez avoir au moins un produit pour poursuivre la commande.</p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <h2 class="titleCommand">Votre panier est vide</h2>
+            {% endif %}
+
+            <br />
+        </div>
+    </div>
+    <div class="barre3"></div>
 
 {% endblock %}

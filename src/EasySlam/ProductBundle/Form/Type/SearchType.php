@@ -31,6 +31,13 @@ class SearchType extends AbstractType
                     'expanded' => true,
                     'multiple' => true
                 )
+            )->add('Categorie','entity',
+                array(
+                    'class' => 'EasySlamProductBundle:VarianteCategory',
+                    'property' => 'name',
+                    'expanded' => true,
+                    'multiple' => true
+                )
             )->add('Rechercher', 'submit');
 
         $builder->setMethod('GET');

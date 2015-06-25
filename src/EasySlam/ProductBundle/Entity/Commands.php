@@ -28,70 +28,70 @@ class Commands
     /**
      * @var string
      *
-     * @ORM\Column(name="addressLiv", type="string", length=255)
+     * @ORM\Column(name="addressLiv", type="string", length=255, nullable=true)
      */
     private $addressLiv;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cityLiv", type="string", length=100)
+     * @ORM\Column(name="cityLiv", type="string", length=100, nullable=true)
      */
     private $cityLiv;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="stateLiv", type="string", length=100)
+     * @ORM\Column(name="stateLiv", type="string", length=100, nullable=true)
      */
     private $stateLiv;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="codePostalLiv", type="integer")
+     * @ORM\Column(name="codePostalLiv", type="integer", nullable=true)
      */
     private $codePostalLiv;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateLiv", type="date")
+     * @ORM\Column(name="dateLiv", type="date", nullable=true)
      */
     private $dateLiv;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="addressFac", type="string", length=255)
+     * @ORM\Column(name="addressFac", type="string", length=255, nullable=true)
      */
     private $addressFac;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cityFac", type="string", length=100)
+     * @ORM\Column(name="cityFac", type="string", length=100, nullable=true)
      */
     private $cityFac;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="stateFac", type="string", length=100)
+     * @ORM\Column(name="stateFac", type="string", length=100, nullable=true)
      */
     private $stateFac;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codePostalFac", type="string", length=10)
+     * @ORM\Column(name="codePostalFac", type="string", length=10, nullable=true)
      */
     private $codePostalFac;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePayement", type="date")
+     * @ORM\Column(name="datePayement", type="date", nullable=true)
      */
     private $datePayement;
 
@@ -116,10 +116,16 @@ class Commands
      */
     protected $detailsCommands;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="final", type="boolean")
+     */
+    private $final;
+
 
     public function __construct()
     {
-        $this->etat = new ArrayCollection();
         $this->detailsCommands = new ArrayCollection();
     }
 
@@ -373,7 +379,7 @@ class Commands
      *
      * @param \EasySlam\ProductBundle\Entity\EtatCommand $etatCommand
      */
-    public function setEtat(EtatCommand $etatCommand)
+    public function setEtat($etatCommand)
     {
         $this->etat = $etatCommand;
     }
@@ -440,6 +446,21 @@ class Commands
 
     public function __toString()
     {
-        return "Gestion des commandes";
+        return $this->getName();
+    }
+
+    public function getFinal()
+    {
+        return $this->final;
+    }
+
+    public function setFinal($final)
+    {
+        $this->final = $final;
+    }
+
+    public function getName()
+    {
+        return "Commande n° " . $this->getId();
     }
 }
