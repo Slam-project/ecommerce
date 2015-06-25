@@ -42,6 +42,12 @@ class Demande
      */
     private $date;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="response", type="boolean", options={"default" = false})
+     */
+    private $response;
 
     /**
      * Get id
@@ -121,6 +127,9 @@ class Demande
         return $this->date;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         if ($this->id != null) {
@@ -128,5 +137,21 @@ class Demande
         }
 
         return "Nouvelle demande";
+    }
+
+    /**
+     * @return bool
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param boolean $response
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
     }
 }

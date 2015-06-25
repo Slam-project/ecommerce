@@ -42,6 +42,10 @@ class DemandeAdmin extends Admin
                 'label' => "Date limite",
                 'required' => true
             ))
+            ->add('response', 'checkbox', array(
+                'label' => "Demande aboutie",
+                'required' => false
+            ))
         ;
     }
 
@@ -59,7 +63,11 @@ class DemandeAdmin extends Admin
                     'label' => "Quantité"
                 )
             )
-
+            ->add('response', null,
+                array(
+                    'label' => 'Demande aboutie'
+                )
+            )
         ;
     }
 
@@ -75,6 +83,11 @@ class DemandeAdmin extends Admin
             ->add('quantite', null,
                 array(
                     'label' => "Quantité"
+                )
+            )
+            ->add('response', null,
+                array(
+                    'label' => 'Demande aboutie'
                 )
             )
         ;
