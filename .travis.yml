@@ -13,7 +13,7 @@ before_script:
 
 script:
 #  - phpunit -c app
-#  - bin/behat
+  - bin/behat
 
 notifications:
   email:
