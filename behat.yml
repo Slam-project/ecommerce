@@ -1,0 +1,36 @@
+default:
+    extensions:
+        Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            #base_url: http://bolthorm.local/
+            base_url: http://127.0.0.1/
+            goutte: ~
+            sessions:
+                default:
+                    symfony2: ~
+                my_session:
+                    selenium2: ~
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    session:   '@session'
+        main_bundle:
+            contexts:
+                - FeatureContext
+            type: symfony_bundle
+            bundle: 'EasySlamMainBundle'
+dev:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://slam.local/app_dev.php/
+
+preprod:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://127.0.0.1/
+
+prod:
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://127.0.0.1/
