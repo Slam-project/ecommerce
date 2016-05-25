@@ -25,3 +25,6 @@ addons:
     apt:
         packages:
             - apache2
+
+notifications:
+    slack: easyinte:GWgNKDiQ2AXYL25oWdsqigMv
