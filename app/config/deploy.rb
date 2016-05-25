@@ -1,9 +1,9 @@
 # Base config :
 set     :application,   "Integration continue"
-set     :domain,        "bolthorm.com"
+set     :domain,        "172.16.222.149"
 set     :deploy_to,     "/var/www/ecommerce"
 set     :app_path,      "app"
-set     :user,          "deploy"
+set     :user,          "alexandre"
 
 set     :use_sudo,      false
 set     :interactive_mode, false
@@ -47,6 +47,6 @@ role    :app,           domain, :primary => true       # This may be the same as
 logger.level = Logger::MAX_LEVEL
 
 before "symfony:assetic:dump", "symfony:assets:update_version"
-after "deploy", "deploy:cleanup"
-after "deploy", "symfony:clear_apc"
-after "deploy:rollback:cleanup", "symfony:clear_apc"
+#after "deploy", "deploy:cleanup"
+#after "deploy", "symfony:clear_apc"
+#after "deploy:rollback:cleanup", "symfony:clear_apc"
